@@ -1,4 +1,4 @@
-package sub.ent;
+package sub.ent.api;
 
 public interface MyInterface {
 
