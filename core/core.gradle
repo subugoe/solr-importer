@@ -17,7 +17,7 @@ sourceCompatibility = 1.8
 build.doLast {
 	task -> println "Finish $task.project.name"
 }
-if (project.path.equals(":web")) {
+if (project.path.equals(":core")) {
 	dependencies {
 		compile project(":api")
 	}
