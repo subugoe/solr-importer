@@ -1,11 +1,11 @@
-package sub.ent.web;
+package sub.ent.backend;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.containsString;
 
 import org.junit.Test;
 
-import sub.ent.web.Timer;
+import sub.ent.backend.Timer;
 
 public class TimerTest {
 

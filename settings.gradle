@@ -1,4 +1,4 @@
-include 'api', 'core'
+include 'web', 'core'
 
-project(":api").buildFileName = "api.gradle"
+project(":web").buildFileName = "web.gradle"
 project(":core").buildFileName = "core.gradle"

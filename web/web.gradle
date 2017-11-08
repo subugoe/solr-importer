@@ -1,0 +1,34 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+
+build.doLast {
+	task -> println "Finish $task.project.name"
+}
+if (project.path.equals(":web")) {
+	dependencies {
+		compile project(":core")
+	}
+} else {
+	dependencies {
+		compile project(":solr-importer:core")
+	}
+}
+ 
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile group: 'org.apache.solr', name: 'solr-core', version: '5.4.1'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
