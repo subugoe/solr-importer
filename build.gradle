@@ -1,2 +1,9 @@
-group = 'sub.ent'
-version = '0.0.1-SNAPSHOT'
+
+allprojects {
+	group = 'sub.ent'
+	version = '0.0.1-SNAPSHOT'
+	repositories {
+		mavenCentral()
+	}
+	apply plugin: 'java'
+}

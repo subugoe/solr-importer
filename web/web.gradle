@@ -14,19 +14,20 @@ apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 
-build.doFirst {
-	task -> println "Begin $task.project.name"
-}
 build.doLast {
 	task -> println "Finish $task.project.name"
 }
-
-repositories {
-	mavenCentral()
+if (project.path.equals(":web")) {
+	dependencies {
+		compile project(":api")
+	}
+} else {
+	dependencies {
+		compile project(":solr-importer:api")
+	}
 }
-
+ 
 dependencies {
-	compile project(":solr-importer:api")
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

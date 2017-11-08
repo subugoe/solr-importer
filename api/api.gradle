@@ -1,0 +1,4 @@
+
+build.doLast {
+	task -> println "Finish $task.project.name"
+}

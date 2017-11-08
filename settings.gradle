@@ -1,1 +1,4 @@
 include 'api', 'web'
+
+project(":api").buildFileName = "api.gradle"
+project(":web").buildFileName = "web.gradle"
