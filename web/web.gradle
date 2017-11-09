@@ -29,6 +29,5 @@ if (project.path.equals(":web")) {
  
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile group: 'org.apache.solr', name: 'solr-core', version: '5.4.1'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -2,3 +2,7 @@
 build.doLast {
 	task -> println "Finish $task.project.name"
 }
+
+dependencies {
+	compile group: 'org.apache.solr', name: 'solr-core', version: '5.4.1'
+}
