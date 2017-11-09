@@ -1,7 +1,15 @@
 package sub.ent.web;
 
-import sub.ent.api.MyInterface;
+import java.util.Map;
 
-public class MyWebClass implements MyInterface {
+import sub.ent.api.ImporterStep;
+
+public class MyWebClass extends ImporterStep {
+
+	@Override
+	public void execute(Map<String, String> params) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
