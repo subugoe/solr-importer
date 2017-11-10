@@ -28,6 +28,8 @@ if (project.path.equals(":web")) {
 }
  
 dependencies {
+	compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '4.9.0.201710071750-r'
+	compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

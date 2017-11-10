@@ -1,37 +1,33 @@
 package sub.ent.backend;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
+import java.util.Map;
 
 import sub.ent.api.ImporterStep;
 
 public class Importer {
 
+	private PrintStream out = System.out;
 	protected List<ImporterStep> steps;
+
 	public void setSteps(List<ImporterStep> newSteps) {
 		steps = newSteps;
 	}
 
-	public void executeAllSteps() {
-		for (ImporterStep step : steps) {
-			step.execute(new HashMap<>());
-		}
+	public void setLogOutput(PrintStream newOut) {
+		out = newOut;
 	}
 
-	public String getContext() throws IOException {
-		String contextContent = "";
-		InputStream contextStream = Importer.class.getResourceAsStream("/context.xml");
-		if (contextStream != null) {
-			contextContent = IOUtils.toString(contextStream, "UTF-8");
-			return contextContent;
-		}
-		contextStream = Importer.class.getResourceAsStream("/context-default.xml");
-		contextContent = IOUtils.toString(contextStream, "UTF-8");
-		return contextContent;
-		
+	public int getNumberOfSteps() {
+		return steps.size();
 	}
+
+	public void executeStep(int stepNumber, Map<String, String> parametersForAllSteps) {
+		ImporterStep stepToExecute = steps.get(stepNumber);
+		stepToExecute.setLogOutput(out);
+		stepToExecute.execute(parametersForAllSteps);
+	}
+
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	</head>
+	<body>
+		<h1>FWB-Datenimport aus Git</h1>
+		<br />
+		<h3>Aktueller Commit: <span style="color: blue" th:text="${commitMessage}"></span></h3>
+		<div>Git-URL: <span th:text="${GIT_URL}"></span></div>
+		<br />
+		<hr />
+		<br />
+		<form method="post" action="import">
+			<span>Email für Logs: </span><input name="mailaddress" type="text" />
+			<br />
+			<input type="hidden" name="solrurl" th:value="${SOLR_STAGING_URL}" />
+			<input type="submit" value="Auf Staging-Server importieren" /> (<span th:text="${SOLR_STAGING_URL}"></span>)
+		</form>
+		<br />
+		Aktueller Indexzustand des Staging-Servers: <b><span th:text="${currentCoreDateStaging}"></span></b>
+		<br />
+		<br />
+		<hr />
+		<br />
+		<form method="post" action="import">
+			<span>Email für Logs: </span><input name="mailaddress" type="text" />
+			<br />
+			<input type="hidden" name="solrurl" th:value="${SOLR_LIVE_URL}" />
+			<input type="submit" value="Auf Live-Server importieren" /> (<span th:text="${SOLR_LIVE_URL}"></span>)
+		</form>
+		<br />
+		Aktueller Indexzustand des Live-Servers: <b><span th:text="${currentCoreDate}"></span></b>
+		<br />
+		Hinweis: Es kann nur zwischen den zwei letzten Zuständen hin- und hergeschaltet werden.
+		<br />
+		<form method="post" action="swapcores">
+			<input type="submit" value="Den vorherigen Zustand wiederherstellen" /> (<span th:text="${previousCoreDate}"></span>)
+		</form>
+		
+		<br />
+		<hr />
+		<br />
+		<h4>Letztes Log:</h4>
+		<pre th:text="${log}"></pre>
+	</body>
+</html>

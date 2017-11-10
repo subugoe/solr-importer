@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="refresh" content="30; url=.." />
+	</head>
+	<body>
+		<h1>FWB-Datenimport aus Git</h1>
+		
+		Der Import-Prozess wurde gestartet. Die Log-Ausgabe wird in Kürze an die angegebene Mail-Adresse gesendet.
+		<br />
+		<br />
+		<form method="get" action="cancel">
+			<button type="submit">Import abbrechen</button>
+		</form>
+		<br />
+		Hinweis: In seltenen Fällen kann der Prozess hängenbleiben (z. B. wegen eines Neustarts des Servers während des Imports).
+		<br />
+		Dann läuft der Import nicht zu Ende durch und der obere Knopf bleibt ohne Wirkung.
+		<br />
+		In so einem Fall bitte die folgende URL aufrufen:
+		<br />
+		http://fwbimport.sub.uni-goettingen.de/restart
+		<br />
+		<br />
+		<form method="get" action="/">
+			<button type="submit">Aktuelle Log-Ausgabe laden</button>
+		</form>
+		<br />
+		<pre th:text="${log}"></pre>
+	</body>
+</html>
