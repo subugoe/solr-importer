@@ -1,7 +1,6 @@
 package sub.ent.backend;
 
 import java.io.PrintStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,7 @@ public class Importer {
 		return steps.size();
 	}
 
-	public void executeStep(int stepNumber, Map<String, String> parametersForAllSteps) {
+	public void executeStep(int stepNumber, Map<String, String> parametersForAllSteps) throws Exception {
 		ImporterStep stepToExecute = steps.get(stepNumber);
 		stepToExecute.setLogOutput(out);
 		stepToExecute.execute(parametersForAllSteps);

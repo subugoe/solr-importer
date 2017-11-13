@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import sub.ent.backend.FileAccess;
@@ -56,9 +57,10 @@ public class ImporterRunner implements Runnable {
 			ImporterFactory factory = new ImporterFactory();
 			importer = factory.getImporter();
 			importer.setLogOutput(log);
+			Map<String, String> parametersForAllSteps = constructParams();
 			//Thread.sleep(11000);
 			for (int i = 0; i < importer.getNumberOfSteps(); i++) {
-				importer.executeStep(i, new HashMap<>());
+				importer.executeStep(i, parametersForAllSteps);
 				checkIfContinue();
 			}
 			
@@ -95,12 +97,22 @@ public class ImporterRunner implements Runnable {
 		}
 	}
 
+	private Map<String, String> constructParams() {
+		Map<String, String> params = new HashMap<>();
+		params.put("gitDir", gitDir());
+		params.put("solrXmlDir", solrXmlDir());
+		params.put("solrUrl", solrUrl());
+		params.put("solrImportCore", solrImportCore());
+		params.put("solrOnlineCore", solrOnlineCore());
+		return params;
+	}
+
 	private String inputExcel() {
 		File gitDir = new File(env.getVariable("GIT_DIR"));
 		return new File(gitDir, "FWB-Quellenliste.xlsx").getAbsolutePath();
 	}
 
-	private String teiInputDir() {
+	private String gitDir() {
 		File gitDir = new File(env.getVariable("GIT_DIR"));
 		return gitDir.getAbsolutePath();
 	}

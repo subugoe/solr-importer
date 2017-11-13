@@ -11,5 +11,5 @@ public abstract class ImporterStep {
 		out = newOut;
 	}
 
-	public abstract void execute(Map<String, String> params);
+	public abstract void execute(Map<String, String> params) throws Exception;
 }
