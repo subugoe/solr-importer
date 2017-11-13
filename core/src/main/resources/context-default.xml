@@ -3,11 +3,13 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
   <bean id="upload" class="sub.ent.api.ImporterStepUpload" />
+  <bean id="coreSwap" class="sub.ent.api.ImporterStepCoreSwap" />
 
   <bean id="importer" class="sub.ent.backend.Importer">
     <property name="steps">
       <list>
         <ref local="upload" />
+        <ref local="coreSwap" />
       </list>
     </property>
   </bean>

@@ -78,9 +78,9 @@ public class ImporterRunner implements Runnable {
 			log.println();
 			log.println("    " + timer.getDurationMessage());
 			log.close();
-//			String mailSubject = "FWB: Import endete mit dem Status " + logAccess.getStatusOfLastLog() + " (" + serverName() + ")";
-//			mailer = new Mailer();
-//			mailer.sendLog(mailAddress, mailSubject);
+			String mailSubject = "FWB: Import endete mit dem Status " + logAccess.getStatusOfLastLog() + " (" + serverName() + ")";
+			mailer = new Mailer();
+			mailer.sendLog(mailAddress, mailSubject);
 		}
 	}
 
