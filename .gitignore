@@ -8,3 +8,4 @@ docker.env
 data
 bin
 build
+environment.sh

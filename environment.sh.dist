@@ -1,0 +1,12 @@
+export GIT_DIR=/tmp/git
+export GIT_URL=https://github.com/...
+export GIT_USER='user'
+export GIT_PASSWORD='password'
+export OUTPUT_DIR=/tmp/solrxml
+export SOLR_STAGING_URL=http://localhost:8983/solr
+export SOLR_LIVE_URL=http://localhost:8983/solr
+export SOLR_IMPORT_CORE=icore
+export SOLR_ONLINE_CORE=ocore
+export MAIL_HOST=
+export MAIL_USER='user'
+export MAIL_PASSWORD='password'
