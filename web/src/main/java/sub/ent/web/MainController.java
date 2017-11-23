@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import sub.ent.backend.CoreSwapper;
 import sub.ent.backend.Importer;
-import sub.ent.backend.ImporterFactory;
+import sub.ent.backend.BeanRetriever;
 
 
 @Controller
@@ -28,6 +28,7 @@ public class MainController {
 	private LockFile lock = new LockFile();
 	private ImporterRunner runner = new ImporterRunner();
 	private CoreSwapper swapper = new CoreSwapper();
+	private BeanRetriever beanRetriever = new BeanRetriever();
 	private String lastMessage = "";
 
 	@RequestMapping(method = RequestMethod.GET, value = "/test2")
@@ -46,6 +47,7 @@ public class MainController {
 		model.addAttribute("currentCoreDate", coreInfo(liveUrl(), onlineCore()));
 		model.addAttribute("currentCoreDateStaging", coreInfo(stagingUrl(), onlineCore()));
 		model.addAttribute("log", logAccess.getLogContents());
+		model.addAttribute("headerText", beanRetriever.getProjectDescription());
 		if (lock.exists()) {
 			return "started";
 		}
@@ -108,6 +110,7 @@ public class MainController {
 		RunningThread.instance = new Thread(runner);
 		RunningThread.instance.start();
 		lock.create();
+		model.addAttribute("headerText", beanRetriever.getProjectDescription());
 		return "started";
 	}
 
@@ -119,10 +122,11 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/cancel")
-	public String cancelImport() throws IOException {
+	public String cancelImport(Model model) throws IOException {
 		if (RunningThread.instance != null) {
 			RunningThread.instance.interrupt();
 		}
+		model.addAttribute("headerText", beanRetriever.getProjectDescription());
 		return "stopped";
 	}
 
@@ -155,5 +159,9 @@ public class MainController {
 
 	void setCoreSwapper(CoreSwapper newSwapper) {
 		swapper = newSwapper;
+	}
+
+	void setBeanRetriever(BeanRetriever newRetriever) {
+		beanRetriever = newRetriever;
 	}
 }

@@ -2,6 +2,7 @@ package sub.ent.web;
 
 import static org.mockito.Mockito.*;
 
+import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.CoreSwapper;
 
 public class MyMocks {
@@ -11,6 +12,7 @@ public class MyMocks {
 	public ImporterRunner runner = mock(ImporterRunner.class);
 	public Environment env = mock(Environment.class);
 	public CoreSwapper swapper = mock(CoreSwapper.class);
+	public BeanRetriever retriever = mock(BeanRetriever.class);
 
 	public MyMocks(MainController mc) {
 		mc.setGit(git);
@@ -19,5 +21,6 @@ public class MyMocks {
 		mc.setImporterRunner(runner);
 		mc.setEnvironment(env);
 		mc.setCoreSwapper(swapper);
+		mc.setBeanRetriever(retriever);
 	}
 }

@@ -14,4 +14,8 @@
     </property>
   </bean>
 
+  <bean id="config" class="sub.ent.config.ConfigStrings">
+    <property name="description" value="Generischer Solr-Importer" />
+  </bean>
+
 </beans>

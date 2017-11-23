@@ -11,7 +11,7 @@ import java.util.TimeZone;
 
 import sub.ent.backend.FileAccess;
 import sub.ent.backend.Importer;
-import sub.ent.backend.ImporterFactory;
+import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.Timer;
 
 public class ImporterRunner implements Runnable {
@@ -54,11 +54,12 @@ public class ImporterRunner implements Runnable {
 		log.println("    Online core: " + solrOnlineCore());
 		log.println();
 		try {
-			ImporterFactory factory = new ImporterFactory();
-			importer = factory.getImporter();
+			BeanRetriever retriever = new BeanRetriever();
+			importer = retriever.getImporter();
 			importer.setLogOutput(log);
 			Map<String, String> parametersForAllSteps = constructParams();
-			//Thread.sleep(11000);
+			Thread.sleep(11000);
+			checkIfContinue();
 			for (int i = 0; i < importer.getNumberOfSteps(); i++) {
 				importer.executeStep(i, parametersForAllSteps);
 				checkIfContinue();

@@ -2,9 +2,23 @@ package sub.ent.backend;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ImporterFactory {
+import sub.ent.config.ConfigStrings;
+
+public class BeanRetriever {
+
+	public ConfigStrings getConfig() {
+		return (ConfigStrings) getBean("config");
+	}
+
+	public String getProjectDescription() {
+		return getConfig().getDescription();
+	}
 
 	public Importer getImporter() {
+		return (Importer) getBean("importer");
+	}
+
+	private Object getBean(String beanId) {
 		String contextFile = null;
 		boolean loadUserDefinedContext = getClass().getResource("/context.xml") != null;
 		if (loadUserDefinedContext) {
@@ -13,8 +27,8 @@ public class ImporterFactory {
 			contextFile = "context-default.xml";
 		}
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(contextFile);
-		Importer importer = ctx.getBean("importer", Importer.class);
+		Object bean = ctx.getBean(beanId);
 		ctx.close();
-		return importer;
+		return bean;
 	}
 }
