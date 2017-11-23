@@ -60,8 +60,6 @@ public class ImporterRunner implements Runnable {
 			importer = retriever.getImporter();
 			importer.setLogOutput(log);
 			Map<String, String> parametersForAllSteps = constructParams();
-			Thread.sleep(11000);
-			checkIfContinue();
 			for (int i = 0; i < importer.getNumberOfSteps(); i++) {
 				importer.executeStep(i, parametersForAllSteps);
 				checkIfContinue();
@@ -108,11 +106,6 @@ public class ImporterRunner implements Runnable {
 		params.put("solrImportCore", solrImportCore());
 		params.put("solrOnlineCore", solrOnlineCore());
 		return params;
-	}
-
-	private String inputExcel() {
-		File gitDir = new File(env.getVariable("GIT_DIR"));
-		return new File(gitDir, "FWB-Quellenliste.xlsx").getAbsolutePath();
 	}
 
 	private String gitDir() {
