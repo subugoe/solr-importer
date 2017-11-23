@@ -3,8 +3,10 @@ package sub.ent.web;
 import java.io.File;
 import java.io.PrintStream;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -147,6 +149,14 @@ public class ImporterRunner implements Runnable {
 
 	private String solrOnlineCore() {
 		return env.getVariable("SOLR_ONLINE_CORE");
+	}
+
+	public List<String> getAllStepDescriptions() {
+		List<String> stepDescriptions = new ArrayList<>();
+		if (importer != null) {
+			stepDescriptions = importer.getAllStepDescriptions();
+		}
+		return stepDescriptions;
 	}
 
 	// for unit tests

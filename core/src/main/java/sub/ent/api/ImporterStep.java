@@ -12,4 +12,6 @@ public abstract class ImporterStep {
 	}
 
 	public abstract void execute(Map<String, String> params) throws Exception;
+
+	public abstract String getStepDescription();
 }

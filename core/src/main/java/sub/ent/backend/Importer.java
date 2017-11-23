@@ -1,6 +1,7 @@
 package sub.ent.backend;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,16 @@ public class Importer {
 		ImporterStep stepToExecute = steps.get(stepNumber);
 		stepToExecute.setLogOutput(out);
 		stepToExecute.execute(parametersForAllSteps);
+	}
+
+	public List<String> getAllStepDescriptions() {
+		List<String> stepDescriptions = new ArrayList<>();
+		if(steps != null) {
+			for (ImporterStep step : steps) {
+				stepDescriptions.add(step.getStepDescription());
+			}
+		}
+		return stepDescriptions;
 	}
 
 }

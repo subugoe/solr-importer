@@ -10,19 +10,11 @@
 		<br />
 		Prozess-Schitte: 
 		<br />
-		<br />
-		- Leerlauf von 10 Sekunden
-		<br />
-		- Konvertierung TEI -> XML
-		<br />
-		- Vergleich TEI &lt;-> XML		
-		<br />
-		- Hochladen XML -> Solr
-		<br />
-		- Testabfragen in Solr
-		<br />
-		- Online-Schaltung
-		<br />
+		<div th:if="${stepDescriptions != null}">
+		    <ul>
+		       <li th:each="item : ${stepDescriptions}" th:text="${item}"></li>
+		    </ul>
+		</div>
 		<br />
 		<form method="get" action="/">
 			<button type="submit">Zurück</button>

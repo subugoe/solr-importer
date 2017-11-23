@@ -29,4 +29,9 @@ public class ImporterStepCoreSwap extends ImporterStep {
 
 	}
 
+	@Override
+	public String getStepDescription() {
+		return "Online-Schaltung";
+	}
+
 }

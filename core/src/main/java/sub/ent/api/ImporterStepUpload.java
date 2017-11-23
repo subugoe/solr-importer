@@ -50,4 +50,9 @@ public class ImporterStepUpload extends ImporterStep {
 			out.println("    ... " + currentNumber);
 		}
 	}
+
+	@Override
+	public String getStepDescription() {
+		return "Hochladen XML -> Solr";
+	}
 }

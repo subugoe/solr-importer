@@ -126,6 +126,7 @@ public class MainController {
 		if (RunningThread.instance != null) {
 			RunningThread.instance.interrupt();
 		}
+		model.addAttribute("stepDescriptions", runner.getAllStepDescriptions());
 		model.addAttribute("headerText", beanRetriever.getProjectDescription());
 		return "stopped";
 	}
