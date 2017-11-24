@@ -29,7 +29,7 @@ public class GitWrapper {
 	private Environment env = new Environment();
 
 	public void init() {
-		String gitDir = env.getVariable("GIT_DIR");
+		String gitDir = env.getVariable("GIT_INPUT_DIR");
 		String path = gitDir + "/.git";
 		FileRepositoryBuilder builder = new FileRepositoryBuilder();
 		Repository db;

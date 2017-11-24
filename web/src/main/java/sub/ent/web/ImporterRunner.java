@@ -110,7 +110,7 @@ public class ImporterRunner implements Runnable {
 	}
 
 	private String gitDir() {
-		File gitDir = new File(env.getVariable("GIT_DIR"));
+		File gitDir = new File(env.getVariable("GIT_INPUT_DIR"));
 		return gitDir.getAbsolutePath();
 	}
 

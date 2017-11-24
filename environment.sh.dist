@@ -1,4 +1,4 @@
-export GIT_DIR=/tmp/git
+export GIT_INPUT_DIR=/tmp/git
 export GIT_URL=https://github.com/...
 export GIT_USER='user'
 export GIT_PASSWORD='password'
