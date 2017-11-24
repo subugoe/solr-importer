@@ -55,8 +55,8 @@ public class ImporterRunner implements Runnable {
 		log.println("    Import core: " + solrImportCore());
 		log.println("    Online core: " + solrOnlineCore());
 		log.println();
+		BeanRetriever retriever = new BeanRetriever();
 		try {
-			BeanRetriever retriever = new BeanRetriever();
 			importer = retriever.getImporter();
 			importer.setLogOutput(log);
 			Map<String, String> parametersForAllSteps = constructParams();
@@ -79,7 +79,8 @@ public class ImporterRunner implements Runnable {
 			log.println();
 			log.println("    " + timer.getDurationMessage());
 			log.close();
-			String mailSubject = "FWB: Import endete mit dem Status " + logAccess.getStatusOfLastLog() + " (" + serverName() + ")";
+			String projectName = retriever.getProjectName();
+			String mailSubject = projectName + ": Import endete mit dem Status " + logAccess.getStatusOfLastLog() + " (" + serverName() + ")";
 			mailer = new Mailer();
 			mailer.sendLog(mailAddress, mailSubject);
 		}

@@ -18,6 +18,7 @@
 
   <bean id="config" class="sub.ent.config.ConfigStrings">
     <property name="description" value="Generischer Solr-Importer" />
+    <property name="projectName" value="Importer" />
   </bean>
 
 </beans>

@@ -31,4 +31,8 @@ public class BeanRetriever {
 		ctx.close();
 		return bean;
 	}
+
+	public String getProjectName() {
+		return getConfig().getProjectName();
+	}
 }
