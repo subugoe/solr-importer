@@ -1,4 +1,4 @@
-package sub.ent.web;
+package sub.ent.backend;
 
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;

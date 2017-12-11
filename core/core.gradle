@@ -4,6 +4,8 @@ build.doLast {
 }
 
 dependencies {
+	compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '4.9.0.201710071750-r'
+	compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
 	compile group: 'org.apache.solr', name: 'solr-core', version: '5.4.1'
 	compile group: 'org.springframework', name: 'spring-context', version: '4.3.12.RELEASE'
 }

@@ -4,6 +4,10 @@ import static org.mockito.Mockito.*;
 
 import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.CoreSwapper;
+import sub.ent.backend.Environment;
+import sub.ent.backend.GitWrapper;
+import sub.ent.backend.LockFile;
+import sub.ent.backend.LogAccess;
 
 public class MyMocks {
 	public GitWrapper git = mock(GitWrapper.class);
