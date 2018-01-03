@@ -9,7 +9,7 @@ However, it is designed to function as a kind of framework. The UI and the basic
 
 Linux, Java 8, Gradle 4.2
 
-## Installation 
+## Installation (as a stand-alone tool)
 
 The cloned project must be built using Gradle by executing in the project directory:
 
@@ -36,3 +36,6 @@ Now, you can start the built tool (Web UI):
 ``` java -jar web/build/libs/web-0.0.1-SNAPSHOT.jar ```
 
 The Web UI is now accessible on localhost:8080
+
+## Usage as a framework
+
