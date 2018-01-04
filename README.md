@@ -31,11 +31,20 @@ Then, make the variables available in the current shell:
 
 ``` source environment.sh ```
 
-Now, you can start the built tool (Web UI):
+Now, you can start the tool (Web UI):
 
 ``` java -jar web/build/libs/web-0.0.1-SNAPSHOT.jar ```
 
 The Web UI is now accessible on localhost:8080
 
 ## Usage as a framework
+
+The main idea of this project is to encapsulate reusable code that can be used in several other projects. Your specific project then can implement extensions which are integrated into the overall data import process. In the Wiki of this repository, you can find explanations of the general technology-agnostic concepts. Here, we concentrate on the implementation details.
+
+So, this project is a framework that can have extension plugins. In general, the structure of the whole thing looks like this:
+
+
+    parent project
+    |- this project
+    |- plugin project
 
