@@ -45,6 +45,28 @@ So, this project is a framework that can have extension plugins. In general, the
 
 
     parent project
-    |- this project
-    |- plugin project
+    |- plugin module
+    |- importer module (this project)
+       |- core module
+       |- web module
 
+The parent project is needed to have the importer and the plugin under one roof as modules. This way, it is easy to manage the dependencies between them. At compile time, the plugin depends on the importer, because it needs to extend and use its classes. More precisely, the plugin must depend on the 'core' module. This dependency (and in fact the whole project management) is managed by Gradle.
+
+Long story short, you must create a new Gradle project (the parent) with a module that will contain the plugin extensions. Then you clone the importer (this project) into the parent's directory and define it and its modules (core and web) as the parent's modules. (In fact, it is not a problem for git to have one repository nested into another locally. You still can push and pull separately.) The compile time dependencies must look like this:
+
+    web -> core (already defined)
+    plugin -> core
+
+Furthermore, there must be a runtime dependency:
+
+    web -> plugin
+
+This way, the compiled web UI .jar file will have the plugin in its classpath. Of course, you cannot change the configuration of the web module inside its own source code, since then it would depend on this one specific plugin. What we want is for the importer to be generic. Instead, we 'force' this dependency from outside, namely from the parent. In Gradle configuration this could look like this:
+
+    project(':solr-importer:web') {
+      dependencies {
+	    runtime project(':my-plugin')
+	  }
+    }
+
+Now you can build the whole thing locally, as if it was one project. 
