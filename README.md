@@ -3,7 +3,7 @@
 
 This tool contains a simple user interface (UI) and basic functionality for importing Solr-formatted XML files into a Solr server. It can be used as a stand-alone tool to import already created XML files.
 
-However, it is designed to function as a kind of framework. The UI and the basic functionality can be reused by a specific project. This new project takes the role of a plugin. In it, you can implement your project-specific behavior, like for example data file conversions or testing routines, and then add it to the basic functionality. Read the Wiki pages that belong to this project for a detailed view of the concepts.
+However, it is designed to function as a kind of a framework. The UI and the basic functionality can be reused by a specific project. This new project takes the role of a plugin. In it, you can implement your project-specific behavior, like for example data file conversions or testing routines, and then add it to the basic functionality. In the Wiki of this repository, you can find explanations of the general, technology-agnostic concepts. Here, we will be concentrating on the implementation details.
 
 ## System requirements
 
@@ -43,7 +43,7 @@ If you need to start the Web UI on another port, then execute:
 
 ## Usage as a framework
 
-The main idea of this project is to encapsulate reusable code that can be used in several other projects. Your specific project then can implement extensions which are integrated into the overall data import process. In the Wiki of this repository, you can find explanations of the general technology-agnostic concepts. Here, we concentrate on the implementation details.
+The main idea of this project is to encapsulate reusable code that can be used in several other projects. Your specific project then can implement extensions which are integrated into the overall data import process.
 
 ### Structure of the composite project
 
@@ -92,4 +92,4 @@ Also, since the Web UI needs several environment variables, you must also set th
 
 The plugin extension functionality is based on the dynamic discovery of classes by the Spring Dependency Injection (DI) container. This project here contains the file 'context-default.xml' which is used if there is no plugin present. That is, if it is built and executed as a stand-alone-tool. The XML file defines the names and the order of the 'importer steps'. Those are simple Java classes that extend the class 'ImporterStep.java' in the 'api' package of the 'core' module. The importer contains a couple of such steps, which are generic enough to be used in other projects.
 
-In your own project, in the 'plugin' module, you can use this file as a template and create a file called 'context.xml'. In it, you can use the already implemented steps, change their order, and add your own steps. Inspect the already implemented steps to find out how to create new ones. As soon as your own steps are present in the new XML file, they will be executed during the import process. The most important step is likely to be the conversion from some text/XML/Excel/... format to the Solt XML format. Note that your own step can use all the environment variables, most notably the input directory and output directory paths.
+In your own project, in the 'plugin' module, you can use this file as a template and create a file called 'context.xml'. In it, you can use the already implemented steps, change their order, and add your own steps. Inspect the code of the implemented steps to find out how to create new ones. As soon as your own steps are present in the new XML file, they will be executed during the import process. The most important step is likely to be the conversion from some text/XML/Excel/... format to the Solr XML format. Note that your own step can use all the environment variables, most notably the input directory and output directory paths.
