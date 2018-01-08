@@ -1,12 +1,30 @@
+# directory with the 'original', not yet processed files, e. g. in TEI format,
+# it does not necessarily have to be connected to a git repository
 export GIT_INPUT_DIR=/tmp/git
+
+# data for the remote git repository in which the 'original' files are located,
+# ignored, if the above directory is not connected to git
 export GIT_URL=https://github.com/...
 export GIT_USER='user'
 export GIT_PASSWORD='password'
+
+# directory with the converted files in Solr XML format
+# these files will be sent to Solr
 export OUTPUT_DIR=/tmp/solrxml
+
+# URLs to the two Solr servers that can be chosen in the Web UI
 export SOLR_STAGING_URL=http://localhost:8983/solr
 export SOLR_LIVE_URL=http://localhost:8983/solr
+
+# the Solr core to which the Solr XML files will be sent
 export SOLR_IMPORT_CORE=icore
+
+# the Solr core which is alway online
+# will be swapped with the import core after a successful file import
 export SOLR_ONLINE_CORE=ocore
+
+# data for mailing
+# needs to be present if you want the log file to be sent via email
 export MAIL_HOST=
 export MAIL_USER='user'
 export MAIL_PASSWORD='password'
