@@ -90,4 +90,6 @@ Also, since the Web UI needs several environment variables, you must also set th
 
 ### Implementing your own plugin
 
-The plugin extension functionality is based on the dynamic discovery of classes by the Spring Dependency Injection (DI) container.
+The plugin extension functionality is based on the dynamic discovery of classes by the Spring Dependency Injection (DI) container. This project here contains the file 'context-default.xml' which is used if there is no plugin present. That is, if it is built and executed as a stand-alone-tool. The XML file defines the names and the order of the 'importer steps'. Those are simple Java classes that extend the class 'ImporterStep.java' in the 'api' package of the 'core' module. The importer contains a couple of such steps, which are generic enough to be used in other projects.
+
+In your own project, in the 'plugin' module, you can use this file as a template and create a file called 'context.xml'. In it, you can use the already implemented steps, change their order, and add your own steps. Inspect the already implemented steps to find out how to create new ones. As soon as your own steps are present in the new XML file, they will be executed during the import process. The most important step is likely to be the conversion from some text/XML/Excel/... format to the Solt XML format. Note that your own step can use all the environment variables, most notably the input directory and output directory paths.
