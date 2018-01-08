@@ -61,7 +61,7 @@ The project is managed by Gradle. In general, you must create a new Gradle proje
 
 ### Dependencies
 
-At compile time, the plugin depends on the importer, because it needs to extend and use its classes. More precisely, the plugin must depend on the 'core' module.
+At compile time, the plugin depends on the importer, because it needs to extend and use its classes. More precisely, the plugin must depend on the 'core' module. Refer to the Gradle documentation to find out how to define dependencies between modules.
 
 The compile time dependencies must look like this:
 
