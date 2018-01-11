@@ -17,6 +17,7 @@ public class MyMocks {
 	public Environment env = mock(Environment.class);
 	public CoreSwapper swapper = mock(CoreSwapper.class);
 	public BeanRetriever retriever = mock(BeanRetriever.class);
+	public UrlGetter urlGetter = mock(UrlGetter.class);
 
 	public MyMocks(MainController mc) {
 		mc.setGit(git);
@@ -26,5 +27,6 @@ public class MyMocks {
 		mc.setEnvironment(env);
 		mc.setCoreSwapper(swapper);
 		mc.setBeanRetriever(retriever);
+		mc.setUrlGetter(urlGetter);
 	}
 }

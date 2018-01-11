@@ -3,6 +3,8 @@ package sub.ent.web;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import sub.ent.backend.CoreSwapper;
@@ -33,6 +37,7 @@ public class MainController {
 	private ImporterRunner runner = new ImporterRunner();
 	private CoreSwapper swapper = new CoreSwapper();
 	private BeanRetriever beanRetriever = new BeanRetriever();
+	private UrlGetter urlGetter = new UrlGetter();
 	private String lastMessage = "";
 
 	@RequestMapping(method = RequestMethod.GET, value = "/test2")
@@ -115,6 +120,7 @@ public class MainController {
 		RunningThread.instance.start();
 		lock.create();
 		model.addAttribute("headerText", beanRetriever.getProjectDescription());
+		model.addAttribute("restartUrl", urlGetter.getCurrentUrl() + "/restart");
 		return "started";
 	}
 
@@ -168,5 +174,9 @@ public class MainController {
 
 	void setBeanRetriever(BeanRetriever newRetriever) {
 		beanRetriever = newRetriever;
+	}
+
+	void setUrlGetter(UrlGetter newGetter) {
+		urlGetter = newGetter;
 	}
 }
