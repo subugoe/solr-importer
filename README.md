@@ -3,7 +3,7 @@
 
 This tool contains a simple user interface (UI) and basic functionality for importing Solr-formatted XML files into a Solr server. It can be used as a stand-alone tool to import already created XML files.
 
-However, it is designed to function as a kind of a framework. The UI and the basic functionality can be reused by a specific project. This new project takes the role of a plugin. In it, you can implement your project-specific behavior, like for example data file conversions or testing routines, and then add it to the basic functionality. In the Wiki of this repository, you can find explanations of the general, technology-agnostic concepts. Here, we will be concentrating on the implementation details.
+However, it is designed to function as a kind of a framework. The UI and the basic functionality can be reused by a specific project. This new project takes the role of a plugin. In it, you can implement your project-specific behavior, like for example data file conversions or testing routines, and then add it to the basic functionality. In the Wiki of this repository (https://github.com/subugoe/solr-importer/wiki), you can find explanations of the general, technology-agnostic concepts. Here, we will be concentrating on the implementation details.
 
 ## System requirements
 
@@ -50,10 +50,10 @@ The main idea of this project is to encapsulate reusable code that can be used i
 So, this project is a framework that can have extension plugins. In general, the structure of the whole thing looks like this:
 
     parent project
-    |- plugin module
-    |- importer module (this project)
-       |- core module
-       |- web module
+     |- plugin module
+     |- importer module (this project)
+         |- core module
+         |- web module
 
 As you can see, this is a new composite project that contains several modules, and the importer project from this repository becomes one of the modules. The parent project is needed to have the importer and the plugin under one roof as modules. This way, it is easy to manage the dependencies between them.
 
