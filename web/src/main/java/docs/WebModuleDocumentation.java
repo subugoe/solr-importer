@@ -41,7 +41,7 @@ class WebModuleDocumentation {
 		 * */ objectOf(MainController.class).importIntoSolr(arg(Model.class), "string", "string"); /*
 		 * 
 		 * This one is called as soon as the user starts the import process by clicking a button.
-		 * The strings are user inputs or selections from the frontend.
+		 * The strings are user inputs or selections from the frontend, which will be used for the import.
 		 * Here again, there is a 'short circuit' if the */ objectOf(LockFile.class); /* tells that the 
 		 * import process is already running.
 		 * This is a precaution to prevent the import to be started more than once at the same time.
@@ -78,5 +78,9 @@ class WebModuleDocumentation {
 		 * This method then can be seen as the user's 'safety net' to restore the previous data state of Solr.
 		 * 
 		 */
+	}
+
+	protected void startingTheImport() throws Exception {
+		
 	}
 }

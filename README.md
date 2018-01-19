@@ -59,7 +59,7 @@ So, this project is a framework that can have extension plugins. In general, the
 
 As you can see, this is a new composite project that contains several modules, and the importer project from this repository becomes one of the modules. The parent project is needed to have the importer and the plugin under one roof as modules. This way, it is easy to manage the dependencies between them.
 
-The project is managed by Gradle. In general, you must create a new Gradle project (the parent) with a module that will contain the plugin extensions. This new project can be pushed into its own git repository. Then you clone the importer (this project) into the parent's directory and define it and its modules (core and web) as the parent's modules. In fact, it is not a problem for git to have one repository nested into another locally. You still can push and pull separately. This way, you can reuse the generic importer project in several specific parent projects.
+The project is managed by Gradle. In general, you must create a new Gradle project (the parent) with a module that will contain the plugin extensions. This new project can be pushed into its own git repository. Then you clone the importer (this project) into the parent's directory and define it and its modules (core and web) as the parent's modules. In fact, it is not a problem for git to have one repository nested into another locally. You still can push and pull separately. (In your own parent project, you need to make sure that this importer's directory is in the .gitignore file.) This way, you can reuse the generic importer project in several specific parent projects.
 
 ### Dependencies
 

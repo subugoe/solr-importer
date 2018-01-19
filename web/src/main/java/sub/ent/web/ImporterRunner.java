@@ -20,6 +20,10 @@ import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.Environment;
 import sub.ent.backend.Timer;
 
+/**
+ * Runnable that starts the import process, normally in a thread.
+ *
+ */
 public class ImporterRunner implements Runnable {
 
 	private Importer importer;
@@ -46,6 +50,9 @@ public class ImporterRunner implements Runnable {
 		gitMessage = newMessage;
 	}
 
+	/**
+	 * Starts the import.
+	 */
 	@Override
 	public void run() {
 		timer.setStart(new Date().getTime());
@@ -149,6 +156,12 @@ public class ImporterRunner implements Runnable {
 		return env.getVariable("SOLR_ONLINE_CORE");
 	}
 
+	/**
+	 * Asks for descriptions of importer steps.
+	 * Can be used in the frontend to list all the steps.
+	 * 
+	 * @return List of all descriptions.
+	 */
 	public List<String> getAllStepDescriptions() {
 		List<String> stepDescriptions = new ArrayList<>();
 		if (importer != null) {

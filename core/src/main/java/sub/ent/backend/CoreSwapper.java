@@ -15,13 +15,21 @@ import org.apache.solr.common.params.CoreAdminParams.CoreAdminAction;
 
 import sub.ent.testing.EmbeddedSolr;
 
+/**
+ * Manipulates Solr cores.
+ */
 public class CoreSwapper {
 
 	private SolrClient solr;
 	private String core;
 
+	/**
+	 * Initializes a connection to a Solr server and chooses the core.
+	 * 
+	 */
 	public void setSolrEndpoint(String solrUrl, String coreName) {
 		if ("embedded".equals(solrUrl)) {
+			// for testing
 			solr = EmbeddedSolr.instance;
 		} else {
 			solr = new HttpSolrClient(solrUrl);
@@ -29,6 +37,11 @@ public class CoreSwapper {
 		core = coreName;
 	}
 
+	/**
+	 * Asks for the last modified date of the previously chosen core.
+	 * 
+	 * @return European date and time.
+	 */
 	public String getCoreDate() throws SolrServerException, IOException {
 		CoreAdminRequest adminRequest = new CoreAdminRequest();
 		adminRequest.setAction(CoreAdminAction.STATUS);
@@ -45,6 +58,9 @@ public class CoreSwapper {
 		}
 	}
 
+	/**
+	 * Executes a core swap between the previously chosen core and the one in the argument.
+	 */
 	public void switchTo(String swapCore) throws SolrServerException, IOException {
 		CoreAdminRequest adminRequest = new CoreAdminRequest();
 		adminRequest.setAction(CoreAdminAction.SWAP);
