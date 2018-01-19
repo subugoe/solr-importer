@@ -5,6 +5,8 @@ This tool contains a simple user interface (UI) and basic functionality for impo
 
 However, it is designed to function as a kind of a framework. The UI and the basic functionality can be reused by a specific project. This new project takes the role of a plugin. In it, you can implement your project-specific behavior, like for example data file conversions or testing routines, and then add it to the basic functionality. In the Wiki of this repository (https://github.com/subugoe/solr-importer/wiki), you can find explanations of the general, technology-agnostic concepts. Here, we will be concentrating on the implementation details.
 
+If you want to understand the source code, then take a look at the classes in 'docs' packages. A good starting point is the documentation of the web module (https://github.com/subugoe/solr-importer/blob/master/web/src/main/java/docs/WebModuleDocumentation.java).
+
 ## System requirements
 
 Linux, Java 8, Gradle 4.2
