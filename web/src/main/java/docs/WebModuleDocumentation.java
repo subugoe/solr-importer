@@ -13,7 +13,7 @@ import static docs.ConvenienceMethods.*;
 
 import org.springframework.ui.Model;
 
-class MainDocumentation {
+class WebModuleDocumentation {
 
 	protected void webEntryPoint() throws Exception {
 		
