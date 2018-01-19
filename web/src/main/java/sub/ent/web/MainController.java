@@ -1,11 +1,7 @@
 package sub.ent.web;
 
 import java.io.IOException;
-import java.io.InputStream;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,19 +10,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.CoreSwapper;
 import sub.ent.backend.Environment;
 import sub.ent.backend.GitWrapper;
-import sub.ent.backend.Importer;
 import sub.ent.backend.LockFile;
 import sub.ent.backend.LogAccess;
-import sub.ent.backend.BeanRetriever;
 
-
+/**
+ * Responder to all the user requests from the frontend.
+ */
 @Controller
 public class MainController {
 
@@ -46,6 +41,11 @@ public class MainController {
 		return ResponseEntity.ok().body("some test");
 	}
 
+	/**
+	 * Processes the user request to the root of the application.
+	 * 
+	 * @return The name of the template to be shown in the frontend.
+	 */
 	@RequestMapping(value = "/")
 	public String index(Model model) throws Exception {
 
@@ -106,6 +106,11 @@ public class MainController {
 		return coreDate;
 	}
 
+	/**
+	 * Processes the user request to start the import.
+	 * 
+	 * @return The name of the template to be shown in the frontend.
+	 */
 	@RequestMapping(value = "/import")
 	public String importIntoSolr(Model model, @ModelAttribute("solrurl") String solrUrl,
 			@ModelAttribute("mailaddress") String mailAddress) throws IOException {
@@ -124,6 +129,11 @@ public class MainController {
 		return "started";
 	}
 
+	/**
+	 * Swaps the live and the offline Solr cores.
+	 * 
+	 * @return Redirect to the root path.
+	 */
 	@RequestMapping(value = "/swapcores")
 	public RedirectView swapCores(Model model) throws Exception {
 		swapper.setSolrEndpoint(liveUrl(), onlineCore());
@@ -131,6 +141,11 @@ public class MainController {
 		return new RedirectView("/");
 	}
 
+	/**
+	 * Stops the import process.
+	 * 
+	 * @return The name of the template to be shown in the frontend.
+	 */
 	@RequestMapping(value = "/cancel")
 	public String cancelImport(Model model) throws IOException {
 		if (RunningThread.instance != null) {
@@ -141,6 +156,12 @@ public class MainController {
 		return "stopped";
 	}
 
+	/**
+	 * Allows the import to be started again.
+	 * Useful when the lock file wasn't deleted automatically because of an error.
+	 * 
+	 * @return Redirect to the root path.
+	 */
 	@RequestMapping(value = "/restart")
 	public RedirectView deleteLockFile(Model model) throws Exception {
 		lock.delete();

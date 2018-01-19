@@ -41,6 +41,7 @@ class MainDocumentation {
 		 * */ objectOf(MainController.class).importIntoSolr(arg(Model.class), "string", "string"); /*
 		 * 
 		 * This one is called as soon as the user starts the import process by clicking a button.
+		 * The strings are user inputs or selections from the frontend.
 		 * Here again, there is a 'short circuit' if the */ objectOf(LockFile.class); /* tells that the 
 		 * import process is already running.
 		 * This is a precaution to prevent the import to be started more than once at the same time.
