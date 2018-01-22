@@ -3,13 +3,10 @@ package sub.ent.web;
 import java.io.IOException;
 
 import org.apache.solr.client.solrj.SolrServerException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import sub.ent.backend.BeanRetriever;
@@ -34,12 +31,6 @@ public class MainController {
 	private BeanRetriever beanRetriever = new BeanRetriever();
 	private UrlGetter urlGetter = new UrlGetter();
 	private String lastMessage = "";
-
-	@RequestMapping(method = RequestMethod.GET, value = "/test2")
-	@ResponseBody
-	public ResponseEntity<?> getTest() {
-		return ResponseEntity.ok().body("some test");
-	}
 
 	/**
 	 * Processes the user request to the root of the application.

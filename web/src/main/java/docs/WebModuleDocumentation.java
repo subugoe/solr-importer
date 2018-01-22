@@ -20,7 +20,7 @@ import org.springframework.ui.Model;
 
 class WebModuleDocumentation {
 
-	protected void webEntryPoint() throws Exception {
+	void webEntryPoint() throws Exception {
 		/*
 		 * The entry point of the application is */ the(WebApplication.class); /*
 		 * It has a main method that starts a Spring Boot application.
@@ -85,7 +85,7 @@ class WebModuleDocumentation {
 		 */
 	}
 
-	protected void startingTheImport() throws Exception {
+	void startingTheImport() throws Exception {
 		/*
 		 * The whole import process is started and also completed inside of */ the(ImporterRunner.class); /*,
 		 * namely in its run() method when it is started in a thread.
