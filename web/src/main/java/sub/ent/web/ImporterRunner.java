@@ -38,14 +38,23 @@ public class ImporterRunner implements Runnable {
 	private String mailAddress;
 	private static final String STOP_MESSAGE = "Import process was stopped manually.";
 
+	/**
+	 * Sets the URL of the running Solr server into which the data will be imported.
+	 */
 	public void setSolrUrl(String newUrl) {
 		solrUrl = newUrl;
 	}
 
+	/**
+	 * The contents of the current log file will be sent to this address (or addresses).
+	 */
 	public void setMailAddressToSendLog(String newAddress) {
 		mailAddress = newAddress;
 	}
 
+	/**
+	 * This is only used for logging.
+	 */
 	public void setGitMessage(String newMessage) {
 		gitMessage = newMessage;
 	}

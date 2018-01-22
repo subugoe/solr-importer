@@ -2,9 +2,14 @@ package docs;
 
 import sub.ent.api.ImporterStep;
 import sub.ent.api.ImporterStepCoreSwap;
+import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.CoreSwapper;
+import sub.ent.backend.Environment;
+import sub.ent.backend.Importer;
 import sub.ent.backend.LockFile;
 import sub.ent.backend.LogAccess;
+import sub.ent.backend.Mailer;
+import sub.ent.backend.Timer;
 import sub.ent.web.ImporterRunner;
 import sub.ent.web.MainController;
 import sub.ent.web.RunningThread;
@@ -16,16 +21,16 @@ import org.springframework.ui.Model;
 class WebModuleDocumentation {
 
 	protected void webEntryPoint() throws Exception {
-		
-		/* The entry point of the application is the */ class_(WebApplication.class); /*
+		/*
+		 * The entry point of the application is */ the(WebApplication.class); /*
 		 * It has a main method that starts a Spring Boot application.
 		 * 
 		 * This Spring application searches for all Spring controllers on the classpath.
-		 * The one that is found is the */ class_(MainController.class); /*
+		 * The one that is found is */ the(MainController.class); /*
 		 * It is responsible to process all web requests which are directed to the application. 
 		 * 
 		 * 
-		 * Methods
+		 * Methods of */ the(MainController.class); /*
 		 * 
 		 * */ objectOf(MainController.class).index(arg(Model.class)); /*
 		 * 
@@ -46,9 +51,9 @@ class WebModuleDocumentation {
 		 * import process is already running.
 		 * This is a precaution to prevent the import to be started more than once at the same time.
 		 * In that case, nothing is done besides reading in the current logs with an */ objectOf(LogAccess.class); /*
-		 * Otherwise, the actual import is started.
+		 * Otherwise, the actual import is started (see also */ startingTheImport(); /*).
 		 * This is done by configuring and starting an */ objectOf(ImporterRunner.class); /* inside a thread.
-		 * This object is stored in the */ class_(RunningThread.class); /*, so that it can be forcefully stopped,
+		 * This object is stored in */ the(RunningThread.class); /*, so that it can be forcefully stopped,
 		 * if the user clicks the 'cancel' button.
 		 * Furthermore, the lock file is created here.
 		 * It will be deleted when the import either finishes regularly or is stopped by force.
@@ -58,7 +63,7 @@ class WebModuleDocumentation {
 		 * Here, the running import is stopped, but only after the current
 		 * */ objectOf(ImporterStep.class); /* has finished.
 		 * This is important, so that the application and Solr states remain consistent.
-		 * See also the method */ class_(ImporterRunner.class).run(); /*
+		 * See also the method */ the(ImporterRunner.class).run(); /*
 		 * 
 		 * */ objectOf(MainController.class).deleteLockFile(arg(Model.class)); /*
 		 * 
@@ -81,6 +86,30 @@ class WebModuleDocumentation {
 	}
 
 	protected void startingTheImport() throws Exception {
-		
+		/*
+		 * The whole import process is started and also completed inside of */ the(ImporterRunner.class); /*,
+		 * namely in its run() method when it is started in a thread.
+		 * An */ objectOf(LogAccess.class); /* is used to delete the previous and create a new log file.
+		 * All the relevant status information, but also errors and exceptions are written to this file.
+		 * An */ objectOf(Timer.class); /* measures the overall duration of the import, 
+		 * which is also written in the logs.
+		 * 
+		 * The main work is delegated the an */ objectOf(Importer.class); /*.
+		 * It is created using an */ objectOf(BeanRetriever.class); /*, which encapsulates a dependency 
+		 * injection (DI) container.
+		 * The DI container initializes the */ objectOf(Importer.class); /* with a list of so-called
+		 * 'importer steps' of */ the(ImporterStep.class); /* type.
+		 * These steps need parameters.
+		 * The parameters are constructed here from the user inputs that come from the frontend,
+		 * and also from environment variables using an */ objectOf(Environment.class); /*.
+		 * With the parameters, the */ objectOf(Importer.class); /* executes all the importer steps.
+		 * After each step, it is checked, if the current tread is interrupted.
+		 * This would mean that the user wants to cancel the import process.
+		 * In that case, no further steps are executed and the corresponding error message is written to the logs.
+		 * Otherwise, all the steps are finished.
+		 * In any case, in the end the lock file (not log) is deleted (using an */ objectOf(LockFile.class); /*),
+		 * and a mail containing the logs is sent out with an */ objectOf(Mailer.class); /*.
+		 * 
+		 */
 	}
 }

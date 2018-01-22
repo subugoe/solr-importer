@@ -12,7 +12,7 @@ public class ConvenienceMethods {
 		return mock(clazz);
 	}
 
-	public static <T> T class_(Class<T> clazz) {
+	public static <T> T the(Class<T> clazz) {
 		return mock(clazz);
 	}
 }
