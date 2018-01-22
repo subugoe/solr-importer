@@ -47,6 +47,8 @@ If you need to start the Web UI on another port, then execute:
 
 The main idea of this project is to encapsulate reusable code that can be used in several other projects. Your specific project then can implement extensions which are integrated into the overall data import process.
 
+Originally, the code of this project was part of a specific project. That specific project was tailored to convert some very specific XML files to Solr XML files and then to import the results into Solr. Later on, there was a new project that needed the same importing functionality, but the input data and consequently the conversion algorithms were completely different. The idea was then to extract the commonly used functionality into a separate project and to create an architecture that allows other projects to use it.
+
 ### Structure of the composite project
 
 So, this project is a framework that can have extension plugins. In general, the structure of the whole thing looks like this:
