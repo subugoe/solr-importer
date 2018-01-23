@@ -85,7 +85,7 @@ class WebModuleDocumentation {
 		 */
 	}
 
-	void startingTheImport() throws Exception {
+	void startingTheImport() {
 		/*
 		 * The whole import process is started and also completed inside of */ the(ImporterRunner.class); /*,
 		 * namely in its run() method when it is started in a thread.
@@ -94,7 +94,7 @@ class WebModuleDocumentation {
 		 * An */ objectOf(Timer.class); /* measures the overall duration of the import, 
 		 * which is also written in the logs.
 		 * 
-		 * The main work is delegated the an */ objectOf(Importer.class); /*.
+		 * The main work is delegated to an */ objectOf(Importer.class); /*.
 		 * It is created using an */ objectOf(BeanRetriever.class); /*, which encapsulates a dependency 
 		 * injection (DI) container.
 		 * The DI container initializes the */ objectOf(Importer.class); /* with a list of so-called
@@ -111,5 +111,9 @@ class WebModuleDocumentation {
 		 * and a mail containing the logs is sent out with an */ objectOf(Mailer.class); /*.
 		 * 
 		 */
+	}
+
+	void nextSection() {
+		documentationIn(CoreModuleDocumentation.class);
 	}
 }

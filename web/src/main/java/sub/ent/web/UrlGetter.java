@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+/**
+ * Uses some Spring magic to get the current web address and port, which are also shown in the browser.
+ */
 public class UrlGetter {
 
 	public String getCurrentUrl() {
