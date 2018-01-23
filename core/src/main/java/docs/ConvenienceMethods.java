@@ -12,12 +12,12 @@ class ConvenienceMethods {
 		return mock(clazz);
 	}
 
-	static <T> T the(Class<T> clazz) {
-		return mock(clazz);
+	static void the(Class<?> clazz) {
+		
 	}
 
-	static <T> T documentationIn(Class<T> clazz) {
-		return mock(clazz);
+	static void documentationIn(Class<?> clazz) {
+		
 	}
 
 }

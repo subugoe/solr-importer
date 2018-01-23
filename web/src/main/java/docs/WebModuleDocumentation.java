@@ -63,7 +63,7 @@ class WebModuleDocumentation {
 		 * Here, the running import is stopped, but only after the current
 		 * */ objectOf(ImporterStep.class); /* has finished.
 		 * This is important, so that the application and Solr states remain consistent.
-		 * See also the method */ the(ImporterRunner.class).run(); /*
+		 * See also the method */ objectOf(ImporterRunner.class).run(); /*
 		 * 
 		 * */ objectOf(MainController.class).deleteLockFile(arg(Model.class)); /*
 		 * 
