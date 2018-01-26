@@ -18,6 +18,12 @@ import static docs.ConvenienceMethods.*;
 
 import org.springframework.ui.Model;
 
+/**
+ * This class is pure documentation.
+ * The code snippets are never executed in the actual application.
+ * They just reference class names and method names of the production code to keep them up to date.
+ *
+ */
 class WebModuleDocumentation {
 
 	void webEntryPoint() throws Exception {
@@ -94,7 +100,7 @@ class WebModuleDocumentation {
 		 An */ objectOf(LogAccess.class); /* is used to delete the previous and create a new log file.
 		 All the relevant status information, but also errors and exceptions are written to this file.
 		 An */ objectOf(Timer.class); /* measures the overall duration of the import, 
-		 which is also written in the logs.
+		 which is also written into the logs.
 		 
 		 The main work is delegated to an */ objectOf(Importer.class); /*.
 		 It is created using an */ objectOf(BeanRetriever.class); /*, which encapsulates a dependency 
@@ -110,7 +116,7 @@ class WebModuleDocumentation {
 		 In that case, no further steps are executed and the corresponding error message is written to the logs.
 		 Otherwise, all the steps are finished.
 		 In any case, in the end the lock file (not log) is deleted (using an */ objectOf(LockFile.class); /*),
-		 and a mail containing the logs is sent out with an */ objectOf(Mailer.class); /*.
+		 and a mail containing the logs is sent out using an */ objectOf(Mailer.class); /*.
 		 
 		 */
 	}
