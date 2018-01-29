@@ -20,4 +20,7 @@ class ConvenienceMethods {
 		
 	}
 
+	static void constant(String constant) {
+		
+	}
 }

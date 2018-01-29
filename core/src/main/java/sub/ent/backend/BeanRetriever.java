@@ -4,19 +4,29 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import sub.ent.config.ConfigStrings;
 
+/**
+ * Wrapper for Dependency Injection functionality.
+ *
+ */
 public class BeanRetriever {
 
 	public final static String DI_CONTEXT_IN_PLUGIN = "context.xml";
 	public final static String DI_CONTEXT_DEFAULT = "context-default.xml";
 
-	public ConfigStrings getConfig() {
+	private ConfigStrings getConfig() {
 		return (ConfigStrings) getBean("config");
 	}
 
+	/**
+	 * Looks up the description of the current project (generic or specific).
+	 */
 	public String getProjectDescription() {
 		return getConfig().getDescription();
 	}
 
+	/**
+	 * Loads the importer from the DI context.
+	 */
 	public Importer getImporter() {
 		return (Importer) getBean("importer");
 	}
@@ -35,6 +45,9 @@ public class BeanRetriever {
 		return bean;
 	}
 
+	/**
+	 * Looks up the name of the current project (generic or specific).
+	 */
 	public String getProjectName() {
 		return getConfig().getProjectName();
 	}

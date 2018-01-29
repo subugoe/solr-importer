@@ -20,15 +20,17 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.request.CoreAdminRequest;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.CoreAdminParams.CoreAdminAction;
-import org.apache.solr.core.CoreContainer;
 
 import sub.ent.testing.EmbeddedSolr;
 
+/**
+ * Manages the connection to the Solr server.
+ *
+ */
 public class Uploader {
 
 	private XMLEventReader eventReader;
@@ -40,6 +42,9 @@ public class Uploader {
 
 	private Set<String> ids = new HashSet<>();
 
+	/**
+	 * Defines the running Solr server to use.
+	 */
 	public void setSolrEndpoint(String solrUrl, String coreName) {
 		if ("embedded".equals(solrUrl)) {
 			solr = EmbeddedSolr.instance;
@@ -49,6 +54,10 @@ public class Uploader {
 		core = coreName;
 	}
 
+	/**
+	 * Adds a Solr XML file to be sent to Solr.
+	 * The file is actually converted to a Java object first.
+	 */
 	public void add(File file) throws SolrServerException, IOException {
 		InputStream is = new FileInputStream(file);
 		try {
@@ -58,7 +67,7 @@ public class Uploader {
 		}
 	}
 
-	public void add(InputStream is) throws SolrServerException, IOException {
+	private void add(InputStream is) throws SolrServerException, IOException {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		try {
@@ -130,10 +139,16 @@ public class Uploader {
 		}
 	}
 
+	/**
+	 * Deletes all data in the predefined core.
+	 */
 	public void cleanSolr() throws SolrServerException, IOException {
 		solr.deleteByQuery(core, "*:*");
 	}
 
+	/**
+	 * Reloading the core is a best practice, because the Solr schema might have been changed.
+	 */
 	public void reloadCore() throws SolrServerException, IOException {
 		CoreAdminRequest adminRequest = new CoreAdminRequest();
 		adminRequest.setAction(CoreAdminAction.RELOAD);
@@ -141,12 +156,19 @@ public class Uploader {
 		adminRequest.process(solr);
 	}
 
+	/**
+	 * Performs the actual commit.
+	 * Must be executed after adding all the XML files.
+	 */
 	public void commitToSolr() throws SolrServerException, IOException {
 		flushDocs();
 		solr.commit(core);
 		solr.optimize(core);
 	}
 
+	/**
+	 * Tries to take Solr to the previous state if there is a failure during the import.
+	 */
 	public void rollbackChanges() {
 		try {
 			solr.rollback(core);

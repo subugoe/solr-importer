@@ -10,11 +10,18 @@ import org.apache.solr.client.solrj.SolrServerException;
 import sub.ent.backend.FileAccess;
 import sub.ent.backend.Uploader;
 
+/**
+ * An importer step that sends XML files from a local directory to a Solr server.
+ *
+ */
 public class ImporterStepUpload extends ImporterStep {
 
 	private Uploader uploader = new Uploader();
 	private FileAccess fileAccess = new FileAccess();
 
+	/**
+	 * Prepares the Solr core, reads XML files, and sends them as Solr documents to Solr.
+	 */
 	@Override
 	public void execute(Map<String, String> params) throws Exception {
 		String solrUrl = params.get("solrUrl");
