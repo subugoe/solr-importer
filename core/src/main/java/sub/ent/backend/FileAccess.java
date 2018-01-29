@@ -10,8 +10,15 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+/**
+ * Access to local files and directories.
+ *
+ */
 public class FileAccess {
 
+	/**
+	 * Gets all XML files recursively.
+	 */
 	public List<File> getAllXmlFilesFromDir(File dir) {
 		List<File> xmls = new ArrayList<>();
 		File[] children = dir.listFiles();
@@ -25,10 +32,16 @@ public class FileAccess {
 		return xmls;
 	}
 
+	/**
+	 * Constructs an output stream for a given file.
+	 */
 	public OutputStream createOutputStream(File dir, String fileName) throws FileNotFoundException {
 		return new FileOutputStream(new File(dir, fileName));
 	}
 
+	/**
+	 * Creates a directory if it does not exist yet.
+	 */
 	public void makeSureThatExists(File outputDir) {
 		if (!outputDir.exists()) {
 			System.out.println("Creating directory: " + outputDir);
@@ -39,6 +52,9 @@ public class FileAccess {
 		}
 	}
 
+	/**
+	 * Deletes everything in a directory.
+	 */
 	public void cleanDir(File dir) throws IOException {
 		if (dir.exists()) {
 			FileUtils.cleanDirectory(dir);

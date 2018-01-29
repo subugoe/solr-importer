@@ -7,6 +7,10 @@ import java.io.PrintStream;
 
 import org.apache.commons.io.FileUtils;
 
+/**
+ * Manages the life cycle of a log file.
+ *
+ */
 public class LogAccess {
 
 	private File logFile;
@@ -16,6 +20,9 @@ public class LogAccess {
 		logFile = new File(outputDir, "log.txt");
 	}
 
+	/**
+	 * Reads the contents of the current log file.
+	 */
 	public String getLogContents() {
 		init();
 		try {
@@ -29,6 +36,9 @@ public class LogAccess {
 		}
 	}
 
+	/**
+	 * Finds out if the current log has errors etc.
+	 */
 	public String getStatusOfLastLog() {
 		String log = getLogContents();
 		if (log.contains("ERROR")) {
@@ -42,6 +52,9 @@ public class LogAccess {
 		}
 	}
 
+	/**
+	 * Recreates an empty log file.
+	 */
 	public void clear() {
 		init();
 		try {
@@ -52,6 +65,9 @@ public class LogAccess {
 		}
 	}
 
+	/**
+	 * Connects to the current log file.
+	 */
 	public PrintStream getOutput() {
 		init();
 		PrintStream logOut = null;
@@ -63,6 +79,9 @@ public class LogAccess {
 		return logOut;
 	}
 
+	/**
+	 * Appends a message to the current log file.
+	 */
 	public void append(String message) {
 		init();
 		PrintStream logOut = null;

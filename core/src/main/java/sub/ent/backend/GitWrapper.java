@@ -21,6 +21,10 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
+/**
+ * Can execute git operations on a local repository.
+ *
+ */
 public class GitWrapper {
 
 	private Git git;
@@ -28,6 +32,9 @@ public class GitWrapper {
 	private String gitPassword;
 	private Environment env = new Environment();
 
+	/**
+	 * Initializes the git repo to use.
+	 */
 	public void init() {
 		String gitDir = env.getVariable("GIT_INPUT_DIR");
 		String path = gitDir + "/.git";
@@ -46,6 +53,9 @@ public class GitWrapper {
 		}
 	}
 
+	/**
+	 * Updates the local repository from the remote.
+	 */
 	public void pull() throws WrongRepositoryStateException, InvalidConfigurationException, DetachedHeadException,
 			InvalidRemoteException, CanceledException, RefNotFoundException, RefNotAdvertisedException, NoHeadException,
 			TransportException, GitAPIException {
@@ -55,6 +65,9 @@ public class GitWrapper {
 		pc.call();
 	}
 	
+	/**
+	 * Gets the last message in the local git repo.
+	 */
 	public String getLastCommitMessage() throws NoHeadException, GitAPIException {
 		Iterable<RevCommit> revs = git.log().call();
 		String lastMessage = revs.iterator().next().getShortMessage();

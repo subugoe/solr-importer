@@ -13,7 +13,7 @@ import static docs.ConvenienceMethods.*;
 
 class CoreModuleDocumentation {
 
-	void bla() {
+	void importerWithSteps() {
 		/*
 		 
 		 The essential part of this module is */ the(Importer.class); /* with its 'importer steps'.
@@ -22,8 +22,8 @@ class CoreModuleDocumentation {
 		 Also, all the importer steps are injected into it at runtime.
 		 The class that wraps the DI container functionality is */ the(BeanRetriever.class); /*.
 		 If there is no project-specific plug-in available, then it loads the steps using 
-		 the default file defined by the */ constant(BeanRetriever.DI_CONTEXT_DEFAULT); /*.
-		 However, if it finds the file which is defined in the */ constant(BeanRetriever.DI_CONTEXT_IN_PLUGIN); /*,
+		 the default file defined by the */ constant(BeanRetriever.DI_FILE_DEFAULT); /*.
+		 However, if it finds the file which is defined in the */ constant(BeanRetriever.DI_FILE_IN_PLUGIN); /*,
 		 then the steps are loaded from that file.
 		 That non-default file must be provided by the external project (the plug-in).
 		 

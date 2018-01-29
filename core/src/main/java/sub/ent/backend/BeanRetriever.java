@@ -10,8 +10,8 @@ import sub.ent.config.ConfigStrings;
  */
 public class BeanRetriever {
 
-	public final static String DI_CONTEXT_IN_PLUGIN = "context.xml";
-	public final static String DI_CONTEXT_DEFAULT = "context-default.xml";
+	public final static String DI_FILE_IN_PLUGIN = "context.xml";
+	public final static String DI_FILE_DEFAULT = "context-default.xml";
 
 	private ConfigStrings getConfig() {
 		return (ConfigStrings) getBean("config");
@@ -33,11 +33,11 @@ public class BeanRetriever {
 
 	private Object getBean(String beanId) {
 		String contextFile = null;
-		boolean loadUserDefinedContext = getClass().getResource("/" + DI_CONTEXT_IN_PLUGIN) != null;
+		boolean loadUserDefinedContext = getClass().getResource("/" + DI_FILE_IN_PLUGIN) != null;
 		if (loadUserDefinedContext) {
-			contextFile = DI_CONTEXT_IN_PLUGIN;
+			contextFile = DI_FILE_IN_PLUGIN;
 		} else {
-			contextFile = DI_CONTEXT_DEFAULT;
+			contextFile = DI_FILE_DEFAULT;
 		}
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(contextFile);
 		Object bean = ctx.getBean(beanId);

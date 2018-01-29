@@ -7,10 +7,17 @@ import org.apache.solr.client.solrj.SolrServerException;
 
 import sub.ent.backend.CoreSwapper;
 
+/**
+ * An importer step that switches the names of two Solr cores.
+ *
+ */
 public class ImporterStepCoreSwap extends ImporterStep {
 
 	private CoreSwapper swapper = new CoreSwapper();
 
+	/**
+	 * Changes the name of the offline core to that of the online core and vice versa.
+	 */
 	@Override
 	public void execute(Map<String, String> params) throws Exception {
 		String solrUrl = params.get("solrUrl");

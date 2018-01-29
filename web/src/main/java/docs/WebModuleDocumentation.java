@@ -5,6 +5,7 @@ import sub.ent.api.ImporterStepCoreSwap;
 import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.CoreSwapper;
 import sub.ent.backend.Environment;
+import sub.ent.backend.GitWrapper;
 import sub.ent.backend.Importer;
 import sub.ent.backend.LockFile;
 import sub.ent.backend.LogAccess;
@@ -43,7 +44,7 @@ class WebModuleDocumentation {
 		 
 		 This method is called when the user navigates to the root path.
 		 It is responsible for preparing of all the necessary web attributes,
-		 for making sure that the git repository is up to date, 
+		 for making sure that the git repository is up to date (using an */ objectOf(GitWrapper.class); /*, 
 		 and in the end for calling the 'index.html' template.
 		 An */ objectOf(CoreSwapper.class); /* is used to get information about the Solr cores.
 		 It also uses an */ objectOf(LockFile.class); /* to check if a lock file is present.
