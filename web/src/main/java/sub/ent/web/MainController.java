@@ -29,7 +29,6 @@ public class MainController {
 	private ImporterRunner runner = new ImporterRunner();
 	private CoreSwapper swapper = new CoreSwapper();
 	private BeanRetriever beanRetriever = new BeanRetriever();
-	private UrlGetter urlGetter = new UrlGetter();
 	private String lastMessage = "";
 
 	/**
@@ -116,7 +115,6 @@ public class MainController {
 		RunningThread.instance.start();
 		lock.create();
 		model.addAttribute("headerText", beanRetriever.getProjectDescription());
-		model.addAttribute("restartUrl", urlGetter.getCurrentUrl() + "/restart");
 		return "started";
 	}
 
@@ -188,7 +186,4 @@ public class MainController {
 		beanRetriever = newRetriever;
 	}
 
-	void setUrlGetter(UrlGetter newGetter) {
-		urlGetter = newGetter;
-	}
 }
