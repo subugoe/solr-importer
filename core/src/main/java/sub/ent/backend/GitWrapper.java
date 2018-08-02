@@ -36,15 +36,15 @@ public class GitWrapper {
 	 * Initializes the git repo to use.
 	 */
 	public void init() {
-		String gitDir = env.getVariable("GIT_INPUT_DIR");
+		String gitDir = env.inputDir();
 		String path = gitDir + "/.git";
 		FileRepositoryBuilder builder = new FileRepositoryBuilder();
 		Repository db;
 		try {
 			db = builder.setGitDir(new File(path)).readEnvironment().findGitDir().build();
 			git = Git.wrap(db);
-			gitUser = env.getVariable("GIT_USER");
-			gitPassword = env.getVariable("GIT_PASSWORD");
+			gitUser = env.gitUser();
+			gitPassword = env.gitPassword();
 			if (gitUser == null || gitPassword == null) {
 				throw new RuntimeException("Missing login data for git.");
 			}

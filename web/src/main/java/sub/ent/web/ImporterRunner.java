@@ -130,12 +130,12 @@ public class ImporterRunner implements Runnable {
 	}
 
 	private String gitDir() {
-		File gitDir = new File(env.getVariable("GIT_INPUT_DIR"));
+		File gitDir = new File(env.inputDir());
 		return gitDir.getAbsolutePath();
 	}
 
 	private String solrXmlDir() {
-		File outputDir = new File(env.getVariable("OUTPUT_DIR"));
+		File outputDir = new File(env.outputDir());
 		String solrXmlDir = new File(outputDir, "solrxml").getAbsolutePath();
 		fileAccess.makeSureThatExists(new File(solrXmlDir));
 		return solrXmlDir;
@@ -146,8 +146,8 @@ public class ImporterRunner implements Runnable {
 	}
 
 	private String serverName() {
-		String liveUrl = env.getVariable("SOLR_LIVE_URL");
-		String stagingUrl = env.getVariable("SOLR_STAGING_URL");
+		String liveUrl = env.liveUrl();
+		String stagingUrl = env.stagingUrl();
 		if (solrUrl.equals(liveUrl)) {
 			return "Live-Server";
 		} else if (solrUrl.equals(stagingUrl)) {
@@ -158,11 +158,11 @@ public class ImporterRunner implements Runnable {
 	}
 
 	private String solrImportCore() {
-		return env.getVariable("SOLR_IMPORT_CORE");
+		return env.importCore();
 	}
 
 	private String solrOnlineCore() {
-		return env.getVariable("SOLR_ONLINE_CORE");
+		return env.onlineCore();
 	}
 
 	/**

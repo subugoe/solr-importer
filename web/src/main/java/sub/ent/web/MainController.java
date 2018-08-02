@@ -39,12 +39,12 @@ public class MainController {
 	@RequestMapping(value = "/")
 	public String index(Model model) throws Exception {
 
-		model.addAttribute("SOLR_STAGING_URL", stagingUrl());
-		model.addAttribute("SOLR_LIVE_URL", liveUrl());
-		model.addAttribute("GIT_URL", gitUrl());
-		model.addAttribute("previousCoreDate", coreInfo(liveUrl(), importCore()));
-		model.addAttribute("currentCoreDate", coreInfo(liveUrl(), onlineCore()));
-		model.addAttribute("currentCoreDateStaging", coreInfo(stagingUrl(), onlineCore()));
+		model.addAttribute("SOLR_STAGING_URL", env.stagingUrl());
+		model.addAttribute("SOLR_LIVE_URL", env.liveUrl());
+		model.addAttribute("GIT_URL", env.gitUrl());
+		model.addAttribute("previousCoreDate", coreInfo(env.liveUrl(), env.importCore()));
+		model.addAttribute("currentCoreDate", coreInfo(env.liveUrl(), env.onlineCore()));
+		model.addAttribute("currentCoreDateStaging", coreInfo(env.stagingUrl(), env.onlineCore()));
 		model.addAttribute("log", logAccess.getLogContents());
 		model.addAttribute("headerText", beanRetriever.getProjectDescription());
 		if (lock.exists()) {
@@ -62,26 +62,6 @@ public class MainController {
 		model.addAttribute("commitMessage", lastMessage);
 
 		return "index";
-	}
-
-	private String stagingUrl() {
-		return env.getVariable("SOLR_STAGING_URL");
-	}
-
-	private String liveUrl() {
-		return env.getVariable("SOLR_LIVE_URL");
-	}
-
-	private String gitUrl() {
-		return env.getVariable("GIT_URL");
-	}
-
-	private String importCore() {
-		return env.getVariable("SOLR_IMPORT_CORE");
-	}
-
-	private String onlineCore() {
-		return env.getVariable("SOLR_ONLINE_CORE");
 	}
 
 	private String coreInfo(String solrUrl, String core) {
@@ -125,8 +105,8 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/swapcores")
 	public RedirectView swapCores(Model model) throws Exception {
-		swapper.setSolrEndpoint(liveUrl(), onlineCore());
-		swapper.switchTo(importCore());
+		swapper.setSolrEndpoint(env.liveUrl(), env.onlineCore());
+		swapper.switchTo(env.importCore());
 		return new RedirectView("/");
 	}
 

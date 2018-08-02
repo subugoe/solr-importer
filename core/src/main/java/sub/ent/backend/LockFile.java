@@ -17,7 +17,7 @@ public class LockFile {
 	private File lockFilePath;
 
 	private void init() {
-		File outputDir = new File(env.getVariable("OUTPUT_DIR"));
+		File outputDir = new File(env.outputDir());
 		lockFilePath = new File(outputDir, "lock");
 	}
 

@@ -20,12 +20,12 @@ public class Mailer {
 	 */
 	public void sendLog(String mailAddress, String mailSubject) {
 		try {
-			String user = env.getVariable("MAIL_USER");
-			String password = env.getVariable("MAIL_PASSWORD");
+			String user = env.mailUser();
+			String password = env.mailPassword();
 			if (notEmpty(user) && notEmpty(password)) {
 				email.setAuthentication(user, password);
 			}
-			email.setHostName(env.getVariable("MAIL_HOST"));
+			email.setHostName(env.mailHost());
 			email.setSmtpPort(587);
 			email.setFrom("no-reply@fwb-online.de");
 			email.setDebug(false);

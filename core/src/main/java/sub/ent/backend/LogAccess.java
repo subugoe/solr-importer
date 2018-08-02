@@ -16,7 +16,7 @@ public class LogAccess {
 	private File logFile;
 
 	private void init() {
-		File outputDir = new File(new Environment().getVariable("OUTPUT_DIR"));
+		File outputDir = new File(new Environment().outputDir());
 		logFile = new File(outputDir, "log.txt");
 	}
 
