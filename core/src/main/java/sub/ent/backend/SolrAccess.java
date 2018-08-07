@@ -37,11 +37,19 @@ public class SolrAccess {
 	}
 	
 	public void setCredentials(String user, String password) {
-		if (solr instanceof HttpSolrClient) {
+		if (solr instanceof HttpSolrClient && !empty(user, password)) {
 			((HttpSolrClient)solr).setBaseURL(url.replace("://", "://" + user + ":" + password + "@"));
 		}
 	}
 	
+	private boolean empty(String... strings) {
+		for (String s : strings) {
+			if (s == null || "".equals(s))
+				return true;
+		}
+		return false;
+	}
+
 	public void startDoc() {
 		currentSolrDoc = new SolrInputDocument();
 	}

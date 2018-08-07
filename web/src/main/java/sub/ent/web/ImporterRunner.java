@@ -71,9 +71,9 @@ public class ImporterRunner implements Runnable {
 		log.println("    Starting import (" + currentDate() + ")");
 		log.println();
 		log.println("    Git commit message: " + gitMessage);
-		log.println("    Solr URL: " + solrUrl());
-		log.println("    Import core: " + solrImportCore());
-		log.println("    Online core: " + solrOnlineCore());
+		log.println("    Solr URL: " + solrUrl);
+		log.println("    Import core: " + env.importCore());
+		log.println("    Online core: " + env.onlineCore());
 		log.println();
 		BeanRetriever retriever = new BeanRetriever();
 		try {
@@ -123,9 +123,11 @@ public class ImporterRunner implements Runnable {
 		Map<String, String> params = new HashMap<>();
 		params.put("gitDir", gitDir());
 		params.put("solrXmlDir", solrXmlDir());
-		params.put("solrUrl", solrUrl());
-		params.put("solrImportCore", solrImportCore());
-		params.put("solrOnlineCore", solrOnlineCore());
+		params.put("solrUrl", solrUrl);
+		params.put("solrImportCore", env.importCore());
+		params.put("solrOnlineCore", env.onlineCore());
+		params.put("solrUser", env.solrUser());
+		params.put("solrPassword", env.solrPassword());
 		return params;
 	}
 
@@ -141,10 +143,6 @@ public class ImporterRunner implements Runnable {
 		return solrXmlDir;
 	}
 
-	private String solrUrl() {
-		return solrUrl;
-	}
-
 	private String serverName() {
 		String liveUrl = env.liveUrl();
 		String stagingUrl = env.stagingUrl();
@@ -155,14 +153,6 @@ public class ImporterRunner implements Runnable {
 		} else {
 			return "Unknown Server";
 		}
-	}
-
-	private String solrImportCore() {
-		return env.importCore();
-	}
-
-	private String solrOnlineCore() {
-		return env.onlineCore();
 	}
 
 	/**

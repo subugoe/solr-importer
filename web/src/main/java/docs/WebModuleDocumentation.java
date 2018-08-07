@@ -3,13 +3,13 @@ package docs;
 import sub.ent.api.ImporterStep;
 import sub.ent.api.ImporterStepCoreSwap;
 import sub.ent.backend.BeanRetriever;
-import sub.ent.backend.CoreSwapper;
 import sub.ent.backend.Environment;
 import sub.ent.backend.GitWrapper;
 import sub.ent.backend.Importer;
 import sub.ent.backend.LockFile;
 import sub.ent.backend.LogAccess;
 import sub.ent.backend.Mailer;
+import sub.ent.backend.SolrAccess;
 import sub.ent.backend.Timer;
 import sub.ent.web.ImporterRunner;
 import sub.ent.web.MainController;
@@ -46,7 +46,7 @@ class WebModuleDocumentation {
 		 It is responsible for preparing of all the necessary web attributes,
 		 for making sure that the git repository is up to date (using an */ objectOf(GitWrapper.class); /*, 
 		 and in the end for calling the 'index.html' template.
-		 An */ objectOf(CoreSwapper.class); /* is used to get information about the Solr cores.
+		 An */ objectOf(SolrAccess.class); /* is used to get information about the Solr cores.
 		 It also uses an */ objectOf(LockFile.class); /* to check if a lock file is present.
 		 If it is, it means that an import process is running.
 		 In that case, there will be a 'short circuit' and the 'started' template will be called instead.

@@ -4,9 +4,9 @@ import sub.ent.api.ImporterStepCoreSwap;
 import sub.ent.api.ImporterStepSleep;
 import sub.ent.api.ImporterStepUpload;
 import sub.ent.backend.BeanRetriever;
-import sub.ent.backend.CoreSwapper;
 import sub.ent.backend.FileAccess;
 import sub.ent.backend.Importer;
+import sub.ent.backend.SolrAccess;
 import sub.ent.backend.Uploader;
 
 import static docs.ConvenienceMethods.*;
@@ -37,7 +37,7 @@ class CoreModuleDocumentation {
 		 It also manages all connections to Solr and some manipulations of the core, like cleaning and reloading it.
 		 In general, it is a good practice to import all the data into a core that is offline.
 		 The last importer step is an */ objectOf(ImporterStepCoreSwap.class); /*.
-		 It uses an */ objectOf(CoreSwapper.class); /* to switch two cores, usually the offline core 
+		 It uses an */ objectOf(SolrAccess.class); /* to switch two cores, usually the offline core 
 		 with the freshly imported data and the online core.
 		 
 		 

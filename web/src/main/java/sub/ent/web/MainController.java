@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import sub.ent.backend.BeanRetriever;
-import sub.ent.backend.CoreSwapper;
 import sub.ent.backend.Environment;
 import sub.ent.backend.GitWrapper;
 import sub.ent.backend.LockFile;
 import sub.ent.backend.LogAccess;
+import sub.ent.backend.SolrAccess;
 
 /**
  * Responder to all the user requests from the frontend.
@@ -27,7 +27,7 @@ public class MainController {
 	private LogAccess logAccess = new LogAccess();
 	private LockFile lock = new LockFile();
 	private ImporterRunner runner = new ImporterRunner();
-	private CoreSwapper swapper = new CoreSwapper();
+	private SolrAccess solrAccess = new SolrAccess();
 	private BeanRetriever beanRetriever = new BeanRetriever();
 	private String lastMessage = "";
 
@@ -65,10 +65,11 @@ public class MainController {
 	}
 
 	private String coreInfo(String solrUrl, String core) {
-		swapper.setSolrEndpoint(solrUrl, core);
+		solrAccess.initialize(solrUrl, core);
+		solrAccess.setCredentials(env.solrUser(), env.solrPassword());
 		String coreDate = null;
 		try {
-			coreDate = swapper.getCoreDate();
+			coreDate = solrAccess.getCoreDate();
 		} catch (SolrServerException | IOException e) {
 			e.printStackTrace();
 			coreDate = "unbekannt";
@@ -105,8 +106,9 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/swapcores")
 	public RedirectView swapCores(Model model) throws Exception {
-		swapper.setSolrEndpoint(env.liveUrl(), env.onlineCore());
-		swapper.switchTo(env.importCore());
+		solrAccess.initialize(env.liveUrl(), env.onlineCore());
+		solrAccess.setCredentials(env.solrUser(), env.solrPassword());
+		solrAccess.switchToCore(env.importCore());
 		return new RedirectView("/");
 	}
 
@@ -158,8 +160,8 @@ public class MainController {
 		env = newEnv;
 	}
 
-	void setCoreSwapper(CoreSwapper newSwapper) {
-		swapper = newSwapper;
+	void setCoreSwapper(SolrAccess newAccess) {
+		solrAccess = newAccess;
 	}
 
 	void setBeanRetriever(BeanRetriever newRetriever) {

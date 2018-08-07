@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.solr.client.solrj.SolrServerException;
 
-import sub.ent.backend.CoreSwapper;
+import sub.ent.backend.SolrAccess;
 
 /**
  * An importer step that switches the names of two Solr cores.
@@ -13,7 +13,7 @@ import sub.ent.backend.CoreSwapper;
  */
 public class ImporterStepCoreSwap extends ImporterStep {
 
-	private CoreSwapper swapper = new CoreSwapper();
+	private SolrAccess solrAccess = new SolrAccess();
 
 	/**
 	 * Changes the name of the offline core to that of the online core and vice versa.
@@ -27,8 +27,8 @@ public class ImporterStepCoreSwap extends ImporterStep {
 		out.println();
 		out.println("    Switching to the online core: " + core + " -> " + swapCore);
 		try {
-			swapper.setSolrEndpoint(solrUrl, core);
-			swapper.switchTo(swapCore);
+			solrAccess.initialize(solrUrl, core);
+			solrAccess.switchToCore(swapCore);
 		} catch (SolrServerException | IOException e) {
 			e.printStackTrace();
 			throw new IOException(e);

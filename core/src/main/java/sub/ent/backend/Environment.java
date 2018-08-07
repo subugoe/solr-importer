@@ -23,6 +23,12 @@ public class Environment {
 	public String liveUrl() {
 		return getVariable("SOLR_LIVE_URL");
 	}
+	public String solrUser() {
+		return getVariable("SOLR_USER");
+	}
+	public String solrPassword() {
+		return getVariable("SOLR_PASSWORD");
+	}
 	public String importCore() {
 		return getVariable("SOLR_IMPORT_CORE");
 	}
