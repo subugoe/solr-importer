@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.xml.namespace.QName;
@@ -18,14 +16,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.apache.solr.client.solrj.request.CoreAdminRequest;
-import org.apache.solr.common.SolrInputDocument;
-import org.apache.solr.common.params.CoreAdminParams.CoreAdminAction;
-
-import sub.ent.testing.EmbeddedSolr;
 
 /**
  * Manages the connection to the Solr server.
@@ -34,24 +25,13 @@ import sub.ent.testing.EmbeddedSolr;
 public class Uploader {
 
 	private XMLEventReader eventReader;
-	private SolrInputDocument currentSolrDoc;
-	private List<SolrInputDocument> allDocs = new ArrayList<>();
 	private final int MAX_DOCS = 2000;
-	private SolrClient solr;
-	private String core;
+	private SolrAccess solrAccess = new SolrAccess();
 
 	private Set<String> ids = new HashSet<>();
 
-	/**
-	 * Defines the running Solr server to use.
-	 */
-	public void setSolrEndpoint(String solrUrl, String coreName) {
-		if ("embedded".equals(solrUrl)) {
-			solr = EmbeddedSolr.instance;
-		} else {
-			solr = new HttpSolrClient(solrUrl);
-		}
-		core = coreName;
+	public void setSolrAccess(SolrAccess newAccess) {
+		solrAccess = newAccess;
 	}
 
 	/**
@@ -95,15 +75,15 @@ public class Uploader {
 			throw new IllegalArgumentException("Error reading XML", e);
 		}
 
-		if (allDocs.size() >= MAX_DOCS) {
-			flushDocs();
+		if (solrAccess.numberOfFinishedDocs() >= MAX_DOCS) {
+			solrAccess.flushFinishedDocs();
 		}
 	}
 
 	private void handleStartElement(StartElement startTag) throws XMLStreamException {
 		String name = startTag.getName().getLocalPart();
 		if ("doc".equals(name)) {
-			currentSolrDoc = new SolrInputDocument();
+			solrAccess.startDoc();
 		}
 
 		if (name.equals("field")) {
@@ -111,7 +91,7 @@ public class Uploader {
 			XMLEvent nextEvent = eventReader.peek();
 			if (nextEvent.isCharacters()) {
 				String fieldValue = nextEvent.asCharacters().getData();
-				currentSolrDoc.addField(fieldName, fieldValue);
+				solrAccess.addFieldToStartedDoc(fieldName, fieldValue);
 
 				if (fieldName.equals("id")) {
 					if (ids.contains(fieldValue)) {
@@ -127,53 +107,8 @@ public class Uploader {
 	private void handleEndElement(EndElement endTag) {
 		String name = endTag.getName().getLocalPart();
 		if ("doc".equals(name)) {
-			allDocs.add(currentSolrDoc);
+			solrAccess.finishDoc();
 		}
 	}
 
-	private void flushDocs() throws SolrServerException, IOException {
-		if (!allDocs.isEmpty()) {
-			solr.add(core, allDocs);
-			allDocs.clear();
-			allDocs = new ArrayList<>();
-		}
-	}
-
-	/**
-	 * Deletes all data in the predefined core.
-	 */
-	public void cleanSolr() throws SolrServerException, IOException {
-		solr.deleteByQuery(core, "*:*");
-	}
-
-	/**
-	 * Reloading the core is a best practice, because the Solr schema might have been changed.
-	 */
-	public void reloadCore() throws SolrServerException, IOException {
-		CoreAdminRequest adminRequest = new CoreAdminRequest();
-		adminRequest.setAction(CoreAdminAction.RELOAD);
-		adminRequest.setCoreName(core);
-		adminRequest.process(solr);
-	}
-
-	/**
-	 * Performs the actual commit.
-	 * Must be executed after adding all the XML files.
-	 */
-	public void commitToSolr() throws SolrServerException, IOException {
-		flushDocs();
-		solr.commit(core);
-		solr.optimize(core);
-	}
-
-	/**
-	 * Tries to take Solr to the previous state if there is a failure during the import.
-	 */
-	public void rollbackChanges() {
-		try {
-			solr.rollback(core);
-		} catch (SolrServerException | IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

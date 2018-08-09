@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.solr.client.solrj.SolrServerException;
 
 import sub.ent.backend.FileAccess;
+import sub.ent.backend.SolrAccess;
 import sub.ent.backend.Uploader;
 
 /**
@@ -18,6 +19,7 @@ public class ImporterStepUpload extends ImporterStep {
 
 	private Uploader uploader = new Uploader();
 	private FileAccess fileAccess = new FileAccess();
+	private SolrAccess solrAccess = new SolrAccess();
 
 	/**
 	 * Prepares the Solr core, reads XML files, and sends them as Solr documents to Solr.
@@ -25,16 +27,20 @@ public class ImporterStepUpload extends ImporterStep {
 	@Override
 	public void execute(Map<String, String> params) throws Exception {
 		String solrUrl = params.get("solrUrl");
+		String solrUser = params.get("solrUser");
+		String solrPassword = params.get("solrPassword");
 		String core = params.get("solrImportCore");
 		String solrXmlDir = params.get("solrXmlDir");
-		uploader.setSolrEndpoint(solrUrl, core);
+		solrAccess.initialize(solrUrl, core);
+		solrAccess.setCredentials(solrUser, solrPassword);
+		uploader.setSolrAccess(solrAccess);
 		try {
 			List<File> xmls = fileAccess.getAllXmlFilesFromDir(new File(solrXmlDir));
 			out.println();
 			out.println("    Cleaning the import core.");
-			uploader.cleanSolr();
+			solrAccess.cleanSolr();
 			out.println("    Reloading the import core.");
-			uploader.reloadCore();
+			solrAccess.reloadCore();
 			out.println("    Uploading index files:");
 			int i = 1;
 			for (File x : xmls) {
@@ -42,12 +48,12 @@ public class ImporterStepUpload extends ImporterStep {
 				uploader.add(x);
 				i++;
 			}
-			uploader.commitToSolr();
+			solrAccess.commitToSolr();
 		} catch (SolrServerException | IOException e) {
 			e.printStackTrace();
 			out.println();
 			out.println("Performing a rollback due to errors.");
-			uploader.rollbackChanges();
+			solrAccess.rollbackChanges();
 			throw new IOException(e);
 		}
 	}

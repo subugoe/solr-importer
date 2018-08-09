@@ -23,11 +23,14 @@ public class ImporterStepCoreSwap extends ImporterStep {
 		String solrUrl = params.get("solrUrl");
 		String core = params.get("solrImportCore");
 		String swapCore = params.get("solrOnlineCore");
+		String solrUser = params.get("solrUser");
+		String solrPassword = params.get("solrPassword");
 
 		out.println();
 		out.println("    Switching to the online core: " + core + " -> " + swapCore);
 		try {
 			solrAccess.initialize(solrUrl, core);
+			solrAccess.setCredentials(solrUser, solrPassword);
 			solrAccess.switchToCore(swapCore);
 		} catch (SolrServerException | IOException e) {
 			e.printStackTrace();
