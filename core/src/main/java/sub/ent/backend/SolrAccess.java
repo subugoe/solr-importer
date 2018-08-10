@@ -22,12 +22,15 @@ public class SolrAccess {
 
 	private SolrInputDocument currentSolrDoc;
 	private List<SolrInputDocument> allDocs = new ArrayList<>();
-	private SolrClient solr;
-	private String url;
-	private String core;
+	protected SolrClient solr;
+	protected String url;
+	protected String core;
+	protected String solrUser;
+	protected String solrPassword;
 
 	public void initialize(String solrUrl, String coreName) {
 		if ("embedded".equals(solrUrl)) {
+			// This is a little trick to use an embedded Server in integration testing
 			solr = EmbeddedSolr.instance;
 		} else {
 			solr = new HttpSolrClient(solrUrl);
@@ -38,6 +41,8 @@ public class SolrAccess {
 	
 	public void setCredentials(String user, String password) {
 		if (solr instanceof HttpSolrClient && !empty(user, password)) {
+			solrUser = user;
+			solrPassword = password;
 			((HttpSolrClient)solr).setBaseURL(url.replace("://", "://" + user + ":" + password + "@"));
 		}
 	}
