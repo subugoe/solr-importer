@@ -3,8 +3,6 @@ package sub.ent.api;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.solr.client.solrj.SolrServerException;
-
 import sub.ent.backend.SolrAccess;
 
 /**
@@ -32,7 +30,7 @@ public class ImporterStepCoreSwap extends ImporterStep {
 			solrAccess.initialize(solrUrl, core);
 			solrAccess.setCredentials(solrUser, solrPassword);
 			solrAccess.switchToCore(swapCore);
-		} catch (SolrServerException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			throw new IOException(e);
 		}

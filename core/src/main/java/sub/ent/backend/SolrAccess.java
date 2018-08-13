@@ -71,39 +71,55 @@ public class SolrAccess {
 		return allDocs.size();
 	}
 	
-	public void flushFinishedDocs() throws SolrServerException, IOException {
-		if (!allDocs.isEmpty()) {
-			solr.add(core, allDocs);
-			allDocs.clear();
-			allDocs = new ArrayList<>();
+	public void flushFinishedDocs() throws IOException {
+		try {
+			if (!allDocs.isEmpty()) {
+					solr.add(core, allDocs);
+				allDocs.clear();
+				allDocs = new ArrayList<>();
+			}
+		} catch (SolrServerException e) {
+			throw new IOException(e);
 		}
 	}
 
 	/**
 	 * Deletes all data in the previously defined core.
 	 */
-	public void cleanSolr() throws SolrServerException, IOException {
-		solr.deleteByQuery(core, "*:*");
+	public void cleanSolr() throws IOException {
+		try {
+			solr.deleteByQuery(core, "*:*");
+		} catch (SolrServerException e) {
+			throw new IOException(e);
+		}
 	}
 
 	/**
 	 * Reloading the core is a best practice, because the Solr schema might have been changed.
 	 */
-	public void reloadCore() throws SolrServerException, IOException {
-		CoreAdminRequest adminRequest = new CoreAdminRequest();
-		adminRequest.setAction(CoreAdminAction.RELOAD);
-		adminRequest.setCoreName(core);
-		adminRequest.process(solr);
+	public void reloadCore() throws IOException {
+		try {
+			CoreAdminRequest adminRequest = new CoreAdminRequest();
+			adminRequest.setAction(CoreAdminAction.RELOAD);
+			adminRequest.setCoreName(core);
+			adminRequest.process(solr);
+		} catch (SolrServerException e) {
+			throw new IOException(e);
+		}
 	}
 
 	/**
 	 * Performs the actual commit.
 	 * Must be executed after adding (finishing) all the documents.
 	 */
-	public void commitToSolr() throws SolrServerException, IOException {
-		flushFinishedDocs();
-		solr.commit(core);
-		solr.optimize(core);
+	public void commitToSolr() throws IOException {
+		try {
+			flushFinishedDocs();
+			solr.commit(core);
+			solr.optimize(core);
+		} catch (SolrServerException e) {
+			throw new IOException(e);
+		}
 	}
 
 	/**
@@ -122,19 +138,23 @@ public class SolrAccess {
 	 * 
 	 * @return European date and time.
 	 */
-	public String getCoreDate() throws SolrServerException, IOException {
-		CoreAdminRequest adminRequest = new CoreAdminRequest();
-		adminRequest.setAction(CoreAdminAction.STATUS);
-		adminRequest.setCoreName(core);
-		CoreAdminResponse response = adminRequest.process(solr);
-		Date coreDate = (Date) response.getCoreStatus().findRecursive(core, "index", "lastModified");
-		if (coreDate != null) {
-			DateFormat form = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.GERMANY);
-			TimeZone timezone = TimeZone.getTimeZone("Europe/Berlin");
-			form.setTimeZone(timezone);
-			return form.format(coreDate);
-		} else {
-			return "leer";
+	public String getCoreDate() throws IOException {
+		try {
+			CoreAdminRequest adminRequest = new CoreAdminRequest();
+			adminRequest.setAction(CoreAdminAction.STATUS);
+			adminRequest.setCoreName(core);
+			CoreAdminResponse response = adminRequest.process(solr);
+			Date coreDate = (Date) response.getCoreStatus().findRecursive(core, "index", "lastModified");
+			if (coreDate != null) {
+				DateFormat form = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.GERMANY);
+				TimeZone timezone = TimeZone.getTimeZone("Europe/Berlin");
+				form.setTimeZone(timezone);
+				return form.format(coreDate);
+			} else {
+				return "leer";
+			}
+		} catch (SolrServerException e) {
+			throw new IOException(e);
 		}
 	}
 
@@ -143,12 +163,16 @@ public class SolrAccess {
 	 * Note: the names are also switched, so executing this method twice with the same argument
 	 * will result in the initial state.
 	 */
-	public void switchToCore(String swapCore) throws SolrServerException, IOException {
-		CoreAdminRequest adminRequest = new CoreAdminRequest();
-		adminRequest.setAction(CoreAdminAction.SWAP);
-		adminRequest.setCoreName(core);
-		adminRequest.setOtherCoreName(swapCore);
-		adminRequest.process(solr);
+	public void switchToCore(String swapCore) throws IOException {
+		try {
+			CoreAdminRequest adminRequest = new CoreAdminRequest();
+			adminRequest.setAction(CoreAdminAction.SWAP);
+			adminRequest.setCoreName(core);
+			adminRequest.setOtherCoreName(swapCore);
+			adminRequest.process(solr);
+		} catch (SolrServerException e) {
+			throw new IOException(e);
+		}
 	}
 
 }

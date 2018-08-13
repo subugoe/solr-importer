@@ -2,7 +2,6 @@ package sub.ent.web;
 
 import java.io.IOException;
 
-import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -70,7 +69,7 @@ public class MainController {
 		String coreDate = null;
 		try {
 			coreDate = solrAccess.getCoreDate();
-		} catch (SolrServerException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			coreDate = "unbekannt";
 		}

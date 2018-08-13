@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,7 @@ public class UploaderTest {
 	}
 
 	// @Test
-	public void test() throws SolrServerException, IOException {
+	public void test() throws IOException {
 		Uploader up = new Uploader();
 	}
 

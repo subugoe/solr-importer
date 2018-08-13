@@ -16,8 +16,6 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.apache.solr.client.solrj.SolrServerException;
-
 /**
  * Manages the connection to the Solr server.
  *
@@ -38,7 +36,7 @@ public class Uploader {
 	 * Adds a Solr XML file to be sent to Solr.
 	 * The file is actually converted to a Java object first.
 	 */
-	public void add(File file) throws SolrServerException, IOException {
+	public void add(File file) throws IOException {
 		InputStream is = new FileInputStream(file);
 		try {
 			add(is);
@@ -47,7 +45,7 @@ public class Uploader {
 		}
 	}
 
-	private void add(InputStream is) throws SolrServerException, IOException {
+	private void add(InputStream is) throws IOException {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		try {

@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.solr.client.solrj.SolrServerException;
-
 import sub.ent.backend.FileAccess;
 import sub.ent.backend.SolrAccess;
 import sub.ent.backend.Uploader;
@@ -49,12 +47,12 @@ public class ImporterStepUpload extends ImporterStep {
 				i++;
 			}
 			solrAccess.commitToSolr();
-		} catch (SolrServerException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			out.println();
 			out.println("Performing a rollback due to errors.");
 			solrAccess.rollbackChanges();
-			throw new IOException(e);
+			throw e;
 		}
 	}
 
