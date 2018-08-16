@@ -1,6 +1,14 @@
 buildscript {
+	//TODO: this probably can be deleted
+    configurations {
+        classpath {
+            exclude group: 'ch.qos.logback', module: 'logback-classic'
+            // OR
+            //exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        }
+    }
 	ext {
-		springBootVersion = '1.5.7.RELEASE'
+		springBootVersion = '2.0.4.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -10,9 +18,16 @@ buildscript {
 	}
 }
 
+apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenCentral()
+}
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 jar.archiveName = project.name + '.jar'
 
@@ -28,8 +43,20 @@ if (project.path.equals(":web")) {
 		compile project(":solr-importer:core")
 	}
 }
- 
+
+
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile ('org.apache.solr:solr-core:7.4.0') {
+		exclude group: 'junit', module: 'junit'
+	}
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+configurations {
+	all {
+		// prevents errors that occur because of two SLF4J implementations on the classpath
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
 }

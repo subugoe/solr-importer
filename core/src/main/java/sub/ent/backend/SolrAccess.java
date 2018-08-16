@@ -33,7 +33,7 @@ public class SolrAccess {
 			// This is a little trick to use an embedded Server in integration testing
 			solr = EmbeddedSolr.instance;
 		} else {
-			solr = new HttpSolrClient(solrUrl);
+			solr = new HttpSolrClient.Builder(solrUrl).build();
 		}
 		url = solrUrl;
 		core = coreName;
