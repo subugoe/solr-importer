@@ -1,12 +1,4 @@
 buildscript {
-	//TODO: this probably can be deleted
-    configurations {
-        classpath {
-            exclude group: 'ch.qos.logback', module: 'logback-classic'
-            // OR
-            //exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-        }
-    }
 	ext {
 		springBootVersion = '2.0.4.RELEASE'
 	}
@@ -18,7 +10,6 @@ buildscript {
 	}
 }
 
-apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -27,9 +18,6 @@ repositories {
 }
 
 sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-jar.archiveName = project.name + '.jar'
 
 build.doLast {
 	task -> println "Finish $task.project.name"
@@ -43,7 +31,6 @@ if (project.path.equals(":web")) {
 		compile project(":solr-importer:core")
 	}
 }
-
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
