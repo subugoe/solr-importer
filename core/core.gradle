@@ -10,4 +10,5 @@ dependencies {
 		exclude group: 'junit', module: 'junit'
 	}
 	compile group: 'org.springframework', name: 'spring-context', version: '5.0.8.RELEASE'
+	compile group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.7.0-21'
 }
