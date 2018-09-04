@@ -5,6 +5,8 @@ package sub.ent.backend;
  *
  */
 public class Environment {
+	
+	public final String UNDEFINED_VALUE = "undefined";
 
 	/**
 	 * Gets an environment variable by name.
@@ -12,7 +14,8 @@ public class Environment {
 	private String getVariable(String name) {
 		String variable = System.getenv(name);
 		if (variable == null) {
-			throw new RuntimeException("Missing environment variable: " + name);
+			System.err.println("WARNING Environment variable not set: " + name + ". Setting to '" + UNDEFINED_VALUE + "'");
+			return UNDEFINED_VALUE;
 		}
 		return variable;
 	}
