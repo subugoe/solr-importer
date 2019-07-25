@@ -55,7 +55,7 @@ public class MainController {
 			git.pull();
 			lastMessage = git.getLastCommitMessage();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("WARNING Problem with git connection: " + e.getMessage());
 			lastMessage = "Fehler: " + e.getMessage();
 		}
 		model.addAttribute("commitMessage", lastMessage);
