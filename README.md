@@ -35,13 +35,13 @@ Then, make the variables available in the current shell:
 
 Now, you can start the tool (Web UI):
 
-``` java -jar web/build/libs/web.jar ```
+``` java -jar web/build/libs/web-0.0.1-SNAPSHOT.jar ```
 
 The Web UI is now accessible on localhost:8080
 
 If you need to start the Web UI on another port, then execute:
 
-``` java -jar -Dserver.port=9090 web/build/libs/web.jar ```
+``` java -jar -Dserver.port=9090 web/build/libs/web-0.0.1-SNAPSHOT.jar ```
 
 ## Usage as a framework
 
