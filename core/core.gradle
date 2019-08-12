@@ -3,6 +3,8 @@ build.doLast {
 	task -> println "Finish $task.project.name"
 }
 
+sourceCompatibility = 1.8
+
 dependencies {
 	compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.0.2.201807311906-r'
 	compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
