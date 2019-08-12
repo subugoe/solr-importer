@@ -37,8 +37,7 @@ public class Mailer {
 			}
 			email.send();
 		} catch (EmailException e) {
-			e.printStackTrace();
-			System.out.println("Could not send mail to " + mailAddress + "(" + e.getMessage() + ")");
+			System.err.println("WARNING Could not send mail to '" + mailAddress + "' (" + e.getMessage() + ")");
 		}
 	}
 
