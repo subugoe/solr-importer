@@ -22,11 +22,16 @@ public class Mailer {
 		try {
 			String user = env.mailUser();
 			String password = env.mailPassword();
+			String str_port = env.mailPort();
 			if (notEmpty(user) && notEmpty(password)) {
 				email.setAuthentication(user, password);
 			}
 			email.setHostName(env.mailHost());
-			email.setSmtpPort(587);
+			int port = 587;
+			if(notEmpty(str_port)) {
+				port = Integer.getInteger(str_port).intValue();
+			}
+			email.setSmtpPort(port);
 			email.setFrom("no-reply@fwb-online.de");
 			email.setDebug(false);
 			email.setSubject(mailSubject);

@@ -56,6 +56,9 @@ public class Environment {
 	public String mailHost() {
 		return getVariable("MAIL_HOST");
 	}
+	public String mailPort() {
+		return getVariable("MAIL_PORT");
+	}
 	public String mailUser() {
 		return getVariable("MAIL_USER");
 	}
