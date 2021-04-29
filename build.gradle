@@ -29,7 +29,6 @@ publishing {
             from components.java
 
             pom {
-                name = 'Solr Importer'
                 description = 'Library for Solr imports'
             }
         }
