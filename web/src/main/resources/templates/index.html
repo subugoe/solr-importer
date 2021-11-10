@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 	<head>
-	</head>
+		<title>Solr Importer</title></head>
 	<body>
 		<h1 th:text="${headerText}"></h1>
 		<br />
@@ -11,7 +12,9 @@
 		<hr />
 		<br />
 		<form method="post" action="import">
-			<span>Email für Logs: </span><input name="mailaddress" type="text" />
+			<span>Email für Logs: </span><label>
+			<input name="mailaddress" type="text" />
+		</label>
 			<br />
 			<input type="hidden" name="solrurl" th:value="${SOLR_STAGING_URL}" />
 			<input type="submit" value="Auf Staging-Server importieren" /> (<span th:text="${SOLR_STAGING_URL}"></span>)
@@ -23,7 +26,9 @@
 		<hr />
 		<br />
 		<form method="post" action="import">
-			<span>Email für Logs: </span><input name="mailaddress" type="text" />
+			<span>Email für Logs: </span><label>
+			<input name="mailaddress" type="text" />
+		</label>
 			<br />
 			<input type="hidden" name="solrurl" th:value="${SOLR_LIVE_URL}" />
 			<input type="submit" value="Auf Live-Server importieren" /> (<span th:text="${SOLR_LIVE_URL}"></span>)
@@ -36,7 +41,7 @@
 		<form method="post" action="swapcores">
 			<input type="submit" value="Den vorherigen Zustand wiederherstellen" /> (<span th:text="${previousCoreDate}"></span>)
 		</form>
-		
+
 		<br />
 		<hr />
 		<br />

@@ -1,13 +1,13 @@
 buildscript {
-	ext {
-		springBootVersion = '2.0.4.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.5.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 apply plugin: 'org.springframework.boot'
@@ -17,33 +17,31 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-
 build.doLast {
-	task -> println "Finish $task.project.name"
+    task -> println "Finish $task.project.name"
 }
 if (project.path.equals(":web")) {
-	dependencies {
-		compile project(":core")
-	}
+    dependencies {
+        compile project(":core")
+    }
 } else {
-	dependencies {
-		compile project(":solr-importer:core")
-	}
+    dependencies {
+        compile project(":solr-importer:core")
+    }
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile("org.springframework.boot:spring-boot-starter-web")
-	compile ('org.apache.solr:solr-core:7.4.0') {
-		exclude group: 'junit', module: 'junit'
-	}
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile('org.apache.solr:solr-core:7.4.0') {
+        exclude group: 'junit', module: 'junit'
+    }
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 configurations {
-	all {
-		// prevents errors that occur because of two SLF4J implementations on the classpath
-		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-	}
+    all {
+        // prevents errors that occur because of two SLF4J implementations on the classpath
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
