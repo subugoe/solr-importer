@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.view.RedirectView;
 
+import org.springframework.web.util.UriComponentsBuilder;
 import sub.ent.backend.BeanRetriever;
 import sub.ent.backend.Environment;
 import sub.ent.backend.GitWrapper;
@@ -32,7 +34,7 @@ public class MainController {
 
 	/**
 	 * Processes the user request to the root of the application.
-	 * 
+	 *
 	 * @return The name of the template to be shown in the frontend.
 	 */
 	@RequestMapping(value = "/")
@@ -78,7 +80,7 @@ public class MainController {
 
 	/**
 	 * Processes the user request to start the import.
-	 * 
+	 *
 	 * @return The name of the template to be shown in the frontend.
 	 */
 	@RequestMapping(value = "/import")
@@ -100,21 +102,23 @@ public class MainController {
 
 	/**
 	 * Swaps the live and the offline Solr cores.
-	 * 
+	 *
 	 * @return Redirect to the root path.
 	 */
 	@RequestMapping(value = "/swapcores")
-	public RedirectView swapCores(Model model) throws Exception {
+	public RedirectView swapCores(Model model, UriComponentsBuilder uriComponentsBuilder) throws Exception {
 		solrAccess.initialize(env.liveUrl(), env.onlineCore());
 		solrAccess.setCredentials(env.solrUser(), env.solrPassword());
 		solrAccess.switchToCore(env.importCore());
-		return new RedirectView("/");
+		String url = MvcUriComponentsBuilder.fromMethodName(uriComponentsBuilder, MainController.class, "index").toUriString();
+
+		return new RedirectView(url);
 	}
 
 	/**
 	 * Stops the import process.
-	 * 
-	 * @return The name of the template to be shown in the frontend.
+	 *
+	 * @return String The name of the template to be shown in the frontend.
 	 */
 	@RequestMapping(value = "/cancel")
 	public String cancelImport(Model model) throws IOException {
@@ -129,13 +133,15 @@ public class MainController {
 	/**
 	 * Allows the import to be started again.
 	 * Useful when the lock file wasn't deleted automatically because of an error.
-	 * 
+	 *
 	 * @return Redirect to the root path.
 	 */
 	@RequestMapping(value = "/restart")
-	public RedirectView deleteLockFile(Model model) throws Exception {
+	public RedirectView deleteLockFile(Model model, UriComponentsBuilder uriComponentsBuilder) throws Exception {
 		lock.delete();
-		return new RedirectView("/");
+		String url = MvcUriComponentsBuilder.fromMethodName(uriComponentsBuilder, MainController.class, "index").toUriString();
+
+		return new RedirectView(url);
 	}
 
 	// for unit testing

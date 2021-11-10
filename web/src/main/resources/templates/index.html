@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <!--suppress ALL -->
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
 	<head>
+		<link th:href="@{/assets/css/main.css}" rel="stylesheet" />
 		<title>Solr Importer</title></head>
 	<body>
 		<h1 th:text="${headerText}"></h1>
 		<br />
-		<h3>Aktueller Commit: <span style="color: blue" th:text="${commitMessage}"></span></h3>
+		<h3>Aktueller Commit: <span class="last-commit" th:text="${commitMessage}"></span></h3>
 		<div>Git-URL: <span th:text="${GIT_URL}"></span></div>
 		<br />
 		<hr />
