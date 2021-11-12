@@ -9,7 +9,7 @@ If you want to understand the source code, then take a look at the classes in 'd
 
 ## System requirements
 
-Linux, Java 8, Gradle 4.2
+Linux, Java 8, Gradle 6.8
 
 ## Installation (as a stand-alone tool)
 
