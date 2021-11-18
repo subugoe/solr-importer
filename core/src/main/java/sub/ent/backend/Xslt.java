@@ -88,7 +88,10 @@ public class Xslt {
 					unknownButProcessedElements.add(warnMessage);
 					errorOut.println();
 					errorOut.println("WARNING " + warnMessage);
-					errorOut.println(inputXmlPath);
+					errorOut.println("Actual vs. expected:");
+					errorOut.println(inputXmlPath
+							.replaceAll(" but was:", "\n")
+							.replaceAll(" expected:", ""));
 					errorOut.println();
 				}
 			}
