@@ -22,22 +22,22 @@ build.doLast {
 }
 if (project.path.equals(":web")) {
     dependencies {
-        compile project(":core")
+        implementation project(":core")
     }
 } else {
     dependencies {
-        compile project(":solr-importer:core")
+        implementation project(":solr-importer:core")
     }
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-    compile("org.springframework.boot:spring-boot-starter-web")
+    implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
-    compile('org.apache.solr:solr-core:7.4.0') {
+    implementation('org.apache.solr:solr-core:7.4.0') {
         exclude group: 'junit', module: 'junit'
     }
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 configurations {

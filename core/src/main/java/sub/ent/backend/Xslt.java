@@ -90,8 +90,8 @@ public class Xslt {
 					errorOut.println("WARNING " + warnMessage);
 					errorOut.println("Actual vs. expected:");
 					errorOut.println(inputXmlPath
-							.replaceAll(" but was:", "\n")
-							.replaceAll(" expected:", ""));
+							.replace(" but was:", "\n")
+							.replace(" expected:", ""));
 					errorOut.println();
 				}
 			}

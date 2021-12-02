@@ -3,14 +3,12 @@ build.doLast {
 	task -> println "Finish $task.project.name"
 }
 
-sourceCompatibility = 1.8
-
 dependencies {
-	compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.0.2.201807311906-r'
-	compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
-	compile ('org.apache.solr:solr-core:7.4.0') {
+	implementation group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.0.2.201807311906-r'
+	implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+	implementation ('org.apache.solr:solr-core:7.4.0') {
 		exclude group: 'junit', module: 'junit'
 	}
-	compile group: 'org.springframework', name: 'spring-context', version: '5.0.8.RELEASE'
-	compile group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.7.0-21'
+	implementation group: 'org.springframework', name: 'spring-context', version: '5.0.8.RELEASE'
+	implementation group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.7.0-21'
 }
