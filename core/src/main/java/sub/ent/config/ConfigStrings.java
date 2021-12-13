@@ -2,7 +2,6 @@ package sub.ent.config;
 
 /**
  * Some configuration values that are injected at runtime by the DI container.
- *
  */
 public class ConfigStrings {
 

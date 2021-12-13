@@ -2,10 +2,9 @@ package sub.ent.backend;
 
 /**
  * Access to environment variables.
- *
  */
 public class Environment {
-	
+
 	public final String UNDEFINED_VALUE = "undefined";
 
 	/**

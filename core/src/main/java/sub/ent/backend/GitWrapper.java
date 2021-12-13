@@ -23,14 +23,13 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 /**
  * Can execute git operations on a local repository.
- *
  */
 public class GitWrapper {
 
 	private Git git;
 	private String gitUser;
 	private String gitPassword;
-	private Environment env = new Environment();
+	private final Environment env = new Environment();
 
 	/**
 	 * Initializes the git repo to use.
@@ -64,14 +63,13 @@ public class GitWrapper {
 		pc.setCredentialsProvider(creds);
 		pc.call();
 	}
-	
+
 	/**
 	 * Gets the last message in the local git repo.
 	 */
 	public String getLastCommitMessage() throws NoHeadException, GitAPIException {
 		Iterable<RevCommit> revs = git.log().call();
-		String lastMessage = revs.iterator().next().getShortMessage();
-		return lastMessage;
+		return revs.iterator().next().getShortMessage();
 	}
 
 }

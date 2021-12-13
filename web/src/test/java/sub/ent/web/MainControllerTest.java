@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 public class MainControllerTest {
 
 	private MyMocks mock;
-	private MainController mainController = new MainController();
-	private Model mockModel = mock(Model.class);
+	private final MainController mainController = new MainController();
+	private final Model mockModel = mock(Model.class);
 
 	@Before
 	public void setUp() throws Exception {

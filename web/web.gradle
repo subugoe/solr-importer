@@ -32,8 +32,9 @@ if (project.path.equals(":web")) {
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    implementation('org.eclipse.jgit:org.eclipse.jgit:5.0.2.201807311906-r')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-hateoas')
     implementation('org.apache.solr:solr-core:7.4.0') {
         exclude group: 'junit', module: 'junit'
     }

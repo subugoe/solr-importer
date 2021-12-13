@@ -15,9 +15,9 @@ import sub.ent.backend.Uploader;
  */
 public class ImporterStepUpload extends ImporterStep {
 
-	private Uploader uploader = new Uploader();
-	private FileAccess fileAccess = new FileAccess();
-	private SolrAccess solrAccess = new SolrAccess();
+	private final Uploader uploader = new Uploader();
+	private final FileAccess fileAccess = new FileAccess();
+	private final SolrAccess solrAccess = new SolrAccess();
 
 	/**
 	 * Prepares the Solr core, reads XML files, and sends them as Solr documents to Solr.

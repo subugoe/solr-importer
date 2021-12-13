@@ -27,14 +27,13 @@ import net.sf.saxon.s9api.XsltTransformer;
 
 /**
  * Wrapper for an XSLT script that can have input parameters.
- *
  */
 public class Xslt {
-	private Processor processor = new Processor(false);
+	private final Processor processor = new Processor(false);
 	private XsltExecutable exe;
-	private Map<String, String> parameters = new HashMap<String, String>();
+	private final Map<String, String> parameters = new HashMap<String, String>();
 	private PrintStream errorOut = System.out;
-	private Set<String> unknownButProcessedElements = new HashSet<>();
+	private final Set<String> unknownButProcessedElements = new HashSet<>();
 
 	/**
 	 * All error messages coming from the XSLT script will be printed here.

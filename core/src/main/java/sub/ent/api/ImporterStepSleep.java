@@ -5,7 +5,6 @@ import java.util.Map;
 /**
  * An importer step that just creates a pause.
  * Can be useful when used as the very first step to give the user time to cancel the whole import.
- *
  */
 public class ImporterStepSleep extends ImporterStep {
 

@@ -18,7 +18,6 @@ import javax.xml.stream.events.XMLEvent;
 
 /**
  * Manages the connection to the Solr server.
- *
  */
 public class Uploader {
 
@@ -26,7 +25,7 @@ public class Uploader {
 	private final int MAX_DOCS = 2000;
 	private SolrAccess solrAccess = new SolrAccess();
 
-	private Set<String> ids = new HashSet<>();
+	private final Set<String> ids = new HashSet<>();
 
 	public void setSolrAccess(SolrAccess newAccess) {
 		solrAccess = newAccess;
@@ -37,11 +36,8 @@ public class Uploader {
 	 * The file is actually converted to a Java object first.
 	 */
 	public void add(File file) throws IOException {
-		InputStream is = new FileInputStream(file);
-		try {
+		try (InputStream is = new FileInputStream(file)) {
 			add(is);
-		} finally {
-			is.close();
 		}
 	}
 

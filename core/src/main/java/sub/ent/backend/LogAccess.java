@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-
 import org.apache.commons.io.FileUtils;
 
 /**
  * Manages the life cycle of a log file.
- *
  */
 public class LogAccess {
 

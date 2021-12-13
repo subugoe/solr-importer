@@ -6,7 +6,6 @@ import sub.ent.config.ConfigStrings;
 
 /**
  * Wrapper for Dependency Injection functionality.
- *
  */
 public class BeanRetriever {
 

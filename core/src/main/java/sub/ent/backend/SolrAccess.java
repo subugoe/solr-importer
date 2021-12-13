@@ -38,7 +38,7 @@ public class SolrAccess {
 		url = solrUrl;
 		core = coreName;
 	}
-	
+
 	public void setCredentials(String user, String password) {
 		if (solr instanceof HttpSolrClient && !empty(user, password)) {
 			solrUser = user;
@@ -46,7 +46,7 @@ public class SolrAccess {
 			((HttpSolrClient)solr).setBaseURL(url.replace("://", "://" + user + ":" + password + "@"));
 		}
 	}
-	
+
 	private boolean empty(String... strings) {
 		for (String s : strings) {
 			if (s == null || "".equals(s))
@@ -58,19 +58,19 @@ public class SolrAccess {
 	public void startDoc() {
 		currentSolrDoc = new SolrInputDocument();
 	}
-	
+
 	public void addFieldToStartedDoc(String fieldName, String fieldValue) {
 		currentSolrDoc.addField(fieldName, fieldValue);
 	}
-	
+
 	public void finishDoc() {
 		allDocs.add(currentSolrDoc);
 	}
-	
+
 	public int numberOfFinishedDocs() {
 		return allDocs.size();
 	}
-	
+
 	public void flushFinishedDocs() throws IOException {
 		try {
 			if (!allDocs.isEmpty()) {
@@ -135,7 +135,7 @@ public class SolrAccess {
 
 	/**
 	 * Asks for the last modified date of the previously chosen core.
-	 * 
+	 *
 	 * @return European date and time.
 	 */
 	public String getCoreDate() throws IOException {

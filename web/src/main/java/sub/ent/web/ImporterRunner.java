@@ -22,7 +22,6 @@ import sub.ent.backend.Timer;
 
 /**
  * Runnable that starts the import process, normally in a thread.
- *
  */
 public class ImporterRunner implements Runnable {
 
@@ -84,7 +83,7 @@ public class ImporterRunner implements Runnable {
 				importer.executeStep(i, parametersForAllSteps);
 				checkIfContinue();
 			}
-			
+
 		} catch (Exception e) {
 			log.println();
 			if ("sleep interrupted".equals(e.getMessage())) {
@@ -158,7 +157,7 @@ public class ImporterRunner implements Runnable {
 	/**
 	 * Asks for descriptions of importer steps.
 	 * Can be used in the frontend to list all the steps.
-	 * 
+	 *
 	 * @return List of all descriptions.
 	 */
 	public List<String> getAllStepDescriptions() {

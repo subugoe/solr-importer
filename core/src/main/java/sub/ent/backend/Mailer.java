@@ -10,9 +10,9 @@ import org.apache.commons.mail.SimpleEmail;
  */
 public class Mailer {
 
-	private LogAccess logAccess = new LogAccess();
-	private Email email = new SimpleEmail();
-	private Environment env = new Environment();
+	private final LogAccess logAccess = new LogAccess();
+	private final Email email = new SimpleEmail();
+	private final Environment env = new Environment();
 
 	/**
 	 * Sends one or several e-mails containing the text of the log file.
@@ -29,7 +29,7 @@ public class Mailer {
 			email.setHostName(env.mailHost());
 			int port = 587;
 			if(notEmpty(str_port)) {
-				port = Integer.getInteger(str_port).intValue();
+				port = Integer.getInteger(str_port);
 			}
 			email.setSmtpPort(port);
 			email.setFrom("no-reply@fwb-online.de");

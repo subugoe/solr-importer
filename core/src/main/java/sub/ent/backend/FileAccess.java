@@ -12,7 +12,6 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * Access to local files and directories.
- *
  */
 public class FileAccess {
 

@@ -5,7 +5,6 @@ import java.util.Map;
 
 /**
  * Parent class for all 'importer steps'.
- *
  */
 public abstract class ImporterStep {
 

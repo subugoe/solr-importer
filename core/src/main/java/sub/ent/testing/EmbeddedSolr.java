@@ -4,7 +4,6 @@ import org.apache.solr.client.solrj.SolrClient;
 
 /**
  * Only used for testing purposes.
- *
  */
 public class EmbeddedSolr {
 

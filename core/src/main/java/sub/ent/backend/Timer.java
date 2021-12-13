@@ -2,7 +2,6 @@ package sub.ent.backend;
 
 /**
  * Measures the duration between two points in time.
- *
  */
 public class Timer {
 

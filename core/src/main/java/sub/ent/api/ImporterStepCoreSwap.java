@@ -11,7 +11,7 @@ import sub.ent.backend.SolrAccess;
  */
 public class ImporterStepCoreSwap extends ImporterStep {
 
-	private SolrAccess solrAccess = new SolrAccess();
+	private final SolrAccess solrAccess = new SolrAccess();
 
 	/**
 	 * Changes the name of the offline core to that of the online core and vice versa.

@@ -24,7 +24,6 @@ import org.springframework.ui.Model;
  * This class is pure documentation.
  * The code snippets are never executed in the actual application.
  * They just reference class names and method names of the production code to keep them up to date.
- *
  */
 class WebModuleDocumentation {
 

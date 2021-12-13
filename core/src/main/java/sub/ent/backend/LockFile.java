@@ -9,11 +9,10 @@ import org.apache.commons.io.FileUtils;
 /**
  * Manages the lifecycle of a lock file.
  * As long as the file is present, it should not be possible to start an import process.
- *
  */
 public class LockFile {
 
-	private Environment env = new Environment();
+	private final Environment env = new Environment();
 	private File lockFilePath;
 
 	private void init() {

@@ -10,7 +10,6 @@ import sub.ent.api.ImporterStep;
 /**
  * Wrapper for the importing functionality.
  * Contains 'importer steps' that should be executed one by one.
- *
  */
 public class Importer {
 
