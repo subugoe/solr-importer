@@ -29,7 +29,10 @@ public class Mailer {
 			email.setHostName(env.mailHost());
 			int port = 587;
 			if(notEmpty(str_port)) {
-				port = Integer.getInteger(str_port);
+				try {
+					port = Integer.parseInt(str_port);
+				} catch (NumberFormatException ignored) {
+				}
 			}
 			email.setSmtpPort(port);
 			email.setFrom(env.mailFrom());
