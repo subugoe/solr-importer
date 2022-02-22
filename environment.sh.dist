@@ -29,3 +29,4 @@ export MAIL_HOST=
 export MAIL_USER='user'
 export MAIL_PORT=
 export MAIL_PASSWORD='password'
+export MAIL_FROM='no-reply@fwb-online.de'

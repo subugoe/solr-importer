@@ -32,7 +32,7 @@ public class Mailer {
 				port = Integer.getInteger(str_port);
 			}
 			email.setSmtpPort(port);
-			email.setFrom("no-reply@fwb-online.de");
+			email.setFrom(env.mailFrom());
 			email.setDebug(false);
 			email.setSubject(mailSubject);
 			email.setMsg(logAccess.getLogContents());

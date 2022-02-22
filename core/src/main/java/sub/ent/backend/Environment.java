@@ -58,6 +58,10 @@ public class Environment {
 	public String mailPort() {
 		return getVariable("MAIL_PORT");
 	}
+	public String mailFrom() {
+		return getVariable("MAIL_FROM");
+	}
+
 	public String mailUser() {
 		return getVariable("MAIL_USER");
 	}
