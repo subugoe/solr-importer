@@ -34,6 +34,11 @@ public class Mailer {
 				} catch (NumberFormatException ignored) {
 				}
 			}
+			if (port == 587) {
+				email.setStartTLSEnabled(true);
+			}
+
+			email.addHeader("X-Priority", "1");
 			email.setSmtpPort(port);
 			email.setFrom(env.mailFrom());
 			email.setDebug(false);
